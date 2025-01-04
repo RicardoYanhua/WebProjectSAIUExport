@@ -1,0 +1,87 @@
+@charset "UTF-8";
+	
+	.table {
+		overflow: hidden;
+		box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+		border-radius: 8px;
+		
+	}
+	.table thead tr th{
+		background-color: rgb(54,54,54);
+		color:rgb(255,255,255);
+		
+	}
+	.table tbody tr td{
+		font-size: 14px;
+	}
+
+
+@media ( max-width : 4080px) {
+	.table{
+		box-shadow: 0 4px 6px rgba(0,0,0,0);
+	}
+	.table thead {
+		display: none;
+	}
+	.table tr {
+		display: block;
+		overflow: hidden;
+		font-size: 14px;
+		margin-bottom: 30px;
+		border: 1px solid rgb(220, 220, 220);
+		border-radius: 8px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+	.table td {
+		display: flex;
+		justify-content: space-between;
+		padding: 4px 20px;
+		border: none;
+		border-bottom: 1px solid #ddd;
+	}
+	.table td:first-child {
+		background-color: rgb(54, 54, 54);
+		color: rgb(255, 255, 255);
+		border-bottom: none;
+		padding: 10px 20px;
+	}
+	.table tr td:first-child::before {
+		background-color: rgb(54,54,54);
+		color: rgb(255, 255, 255);
+	}
+	.table td:last-child {
+		background-color: rgb(245, 245, 255);
+		border-bottom: none;
+		padding: 10px 20px;
+	}
+	.table td::before {
+		content: attr(data-label);
+		font-weight: bold;
+		margin-right: 10px;
+		color: #555;
+	}
+	tbody {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+	}
+	tbody tr {
+		display: contents;
+	}
+	tbody td {
+		border: 1px solid #ccc;
+		padding: 8px;
+	}
+}
+
+@media  (min-width : 744px) and (max-width: 1374px) {
+	tbody {
+		grid-template-columns: repeat(2, 1fr);
+	}	
+}
+
+@media (min-width : 360px) and (max-width: 744px) {
+	tbody {
+		grid-template-columns: repeat(1, 1fr);
+	}	
+}

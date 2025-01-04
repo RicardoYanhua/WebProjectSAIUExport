@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" pageEncoding="UTF-8">
+<title>Insert title here</title>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous">
+	
+</script>
+
+<link href="/Styles/MenuStyle.css" rel="stylesheet">
+<link href="/Styles/ListaClientesStyle.css" rel="stylesheet">
+<link href="/Styles/ButtonStyle.css" rel="stylesheet">
+<link href="/Styles/TableStyle.css" rel="stylesheet">
+<link href="/Styles/InputStyle.css" rel="stylesheet">
+<script src="/Scripts/InputScript.js"></script>
+<script src="/Scripts/MenuScript.js"></script>
+
+
+
+</head>
+<body>
+
+	<div th:insert="Components/Menu :: Menu-Header"
+		class="Header-container"></div>
+
+	<div class="Main-container">
+
+		<div th:insert="Components/Menu :: Menu-Sidebar" id="Menu-container"
+			class="Menu-container"></div>
+
+		<div class="Body-container overflow-y-auto">
+
+			<div>
+
+				<h3 class="fs-3 fw-bold">Clientes</h3>
+				<span class="lead fs-6"> Los clientes son fundamentales para
+					el éxito de cualquier negocio, ya que representan la fuente
+					principal de ingresos y ayudan a sostener la operación de la
+					organización.</span>
+
+
+				<form th:action="@{/Dashboard/Clientes/ListaClientes}" method="get">
+
+					<h6 class="lead mt-3 fs-6">Buscar cliente</h6>
+
+					<div class="d-flex gap-2">
+						<div class="Container-Input">
+							<img src="/SVG/icon-search.svg"> <input id="Input"
+								type="text" placeholder="Ingresar datos del cliente"
+								th:value="${InputBusqueda}" name="InputBusqueda">
+							<button class="ButtonClear" type="button"></button>
+						</div>
+						<button class="btn btn-primary px-4 text-nowrap" type="submit">Buscar
+							cliente</button>
+					</div>
+
+
+					<div class="btn-group w-auto mt-3">
+						<button
+							class="btn btn-dark dropdown-toggle icon-filter ps-5 pe-3 rounded-pill"
+							type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Filtrar por: <span id="TextFilter" th:text="${BusquedaFiltro}"></span>
+							<input type="hidden" id="BusquedaFiltro" name="BusquedaFiltro"
+								th:value="${BusquedaFiltro}">
+						</button>
+						<ul class="dropdown-menu bg-dark">
+
+							<li><button type="button" class="dropdown-item text-white"
+									onclick="setfilterSelect('Todo')">Todo</button></li>
+							<li><button type="button" class="dropdown-item text-white"
+									onclick="setfilterSelect('DNI')">DNI</button></li>
+							<li><button type="button" class="dropdown-item text-white"
+									onclick="setfilterSelect('Nombre')">Nombre</button></li>
+							<li><button type="button" class="dropdown-item text-white"
+									onclick="setfilterSelect('Apellido')">Apellido</button></li>
+							<li><button type="button" class="dropdown-item text-white"
+									onclick="setfilterSelect('Correo')">Correo</button></li>
+							<li><button type="button" class="dropdown-item text-white"
+									onclick="setfilterSelect('Telefono')">Telefono</button></li>
+						</ul>
+					</div>
+
+				</form>
+
+
+				<div class="d-flex mt-4 mb-2 border-bottom border-3 pb-2">
+					<h3 class="flex-grow-1 lead mt-3 fs-4 fw-bold text-nowrap">Lista
+						de clientes</h3>
+					<div
+						class=" d-flex justify-content-end align-items-center mt-1 gap-2 mb-1">
+						<a class="btn btn-outline-primary py-2 px-4 rounded-pill "
+							type="button" th:href="@{/Dashboard/Clientes/NuevoCliente}">Nuevo
+							Cliente</a>
+					</div>
+				</div>
+
+				<table class="table">
+
+					<tr th:each="cliente:${listaClientes}">
+
+						<td th:text="${cliente.dni}" data-label="DNI"></td>
+						<td th:text="${cliente.nombre}" data-label="Nombres"></td>
+						<td th:text="${cliente.apellido}" data-label="Apellidos"></td>
+						<td th:text="${cliente.correo}" data-label="Correo"></td>
+						<td th:text="${cliente.telefono}" data-label="Telefono"></td>
+						<td th:text="${cliente.fecha_registro}" data-label="Ubicacion"></td>
+						<td th:text="${cliente.id}" data-label="Direccion"></td>
+
+						<td>
+							<div class="d-flex gap-2 h-auto">
+								<!--<button type="button" class="btn-icon icon-view"></button> -->
+								<button type="button" class="btn-icon icon-edit"></button>
+
+								<!-- Button trigger modal -->
+								<form role="form"
+									th:action="@{/Dashboard/Clientes/ElimnarCliente/{id}(id=${cliente.id})}"
+									method="post" id="deleteForm">
+
+									<button type="button" class="btn-icon icon-delete"
+										data-bs-toggle="modal" data-bs-target="#MessageConfirmModal">
+									</button>
+								</form>
+
+
+
+
+								<!-- Modal de confirmación -->
+								<div class="modal fade " id="MessageConfirmModal" tabindex="-1"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog ">
+										<div class="modal-content">
+											<div class="modal-header bg-danger mb-2">
+												<h5 class="modal-title fs-6 fw-bold text-white"
+													id="exampleModalLabel">Confirmar eliminación</h5>
+												<button type="button" class="btn-close btn-close-white"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body fs-6 lead">¿Estás seguro de que
+												deseas eliminar este cliente?</div>
+											<div class="modal-footer border-0 gap-1">
+												<button type="button"
+													class="btn btn-outline-secondary rounded-pill px-4"
+													data-bs-dismiss="modal">Cancelar</button>
+												<button type="button"
+													class="btn btn-success rounded-pill px-4"
+													onclick="submitDeleteForm()">Confirmar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+
+								<script>
+									// Función para enviar el formulario desde el modal
+									function submitDeleteForm() {
+										document.getElementById('deleteForm')
+												.submit();
+									}
+								</script>
+
+
+							</div>
+						</td>
+					</tr>
+
+				</table>
+
+				<div class="d-flex justify-content-end">
+
+					<nav aria-label="...">
+						<ul class="pagination">
+
+							<li class="page-item"><a
+								th:href="@{/Dashboard/Clientes/ListaClientes(page=${page.number - 1}, InputBusqueda=${param.InputBusqueda}, BusquedaFiltro=${param.BusquedaFiltro})}"
+								th:if="${page.hasPrevious()}" class="page-link">Previous</a></li>
+
+							<li class="page-item disabled"><a class="page-link" href="#">
+									<span> Página <span th:text="${page.number + 1}"></span>
+										de <span th:text="${page.totalPages}"></span>
+								</span>
+							</a></li>
+
+							<li class="page-item"><a
+								th:href="@{/Dashboard/Clientes/ListaClientes(page=${page.number + 1}, InputBusqueda=${param.InputBusqueda}, BusquedaFiltro=${param.BusquedaFiltro})}"
+								th:if="${page.hasNext()}" class="page-link" href="#">Next</a></li>
+
+						</ul>
+					</nav>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script>
+		function setfilterSelect(text) {
+			const input = document.getElementById('BusquedaFiltro');
+			const span = document.getElementById('TextFilter');
+			span.innerText = text;
+			input.value = text;
+		}
+	</script>
+
+	<script>
+		AddClearTextFunction('Input', '.ButtonClear');
+	</script>
+
+	<script>
+		setActiveByIndex(0);
+	</script>
+
+</body>
+</html>

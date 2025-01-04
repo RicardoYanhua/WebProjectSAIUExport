@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+
+</head>
+
+<body>
+	<div th:fragment="MenuItems" class = "MenuItems">
+	
+		<li class="nav-item">
+			<a class="nav-link" th:href="@{/Dashboard/redirect-cliente}"> 
+				<img src="/SVG/menu_clientes.svg" alt="ClientesIcon"> 
+				<span>Clientes</span>
+			</a>
+		</li>
+		
+		<li class="nav-item">
+			<a class="nav-link"> 
+				<img src="/SVG/menu_productos.svg" alt="ProductosIcon"> 
+				<span>Productos</span>
+			</a>
+		</li>
+		
+		<li class="nav-item">
+			<a class="nav-link">
+				<img src="/SVG/menu_ventas.svg" alt="VentasIcon"> 
+				<span>Ventas</span>
+			</a>
+		</li>
+		
+		<li class="nav-item">
+			<a class="nav-link"> 
+				<img src="/SVG/menu_reportes.svg" alt="ReportesIcon"> 
+				<span>Reportes</span>
+			</a>
+		</li>
+		
+		<li class="nav-item">
+			<a class="nav-link"> 
+				<img src="/SVG/menu_info.svg" alt="AyudaIcon" class="menu-icon"> 
+				<span>Ayuda</span>
+			</a>
+		</li>
+		
+	</div>
+
+
+	<div th:fragment="Menu-Header">
+	
+		<nav class="navbar bg-white py-3">
+		
+			<div class="container-fluid  px-4" >
+			
+				<div class = "d-flex flex-wrap align-content-center justify-content-center gap-3">
+					
+					<img src="/SVG/SauiLogo.svg" alt="Logo" width="30" height="24"  class="d-inline-block align-text-top"> 
+					<span class = "fw-bold">SAUI EXPORT</span>
+					
+					<button id="toggle-menu-button" class="ButtonMenuToggle"
+							onclick="ToggleMenuAction()"></button>
+				</div>
+				
+				
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarNav">
+
+					<ul class="navbar-nav">
+
+						<div th:replace="~{::MenuItems}"></div>
+
+					</ul>
+				</div>
+
+			</div>
+		</nav>
+	</div>
+	
+	<div th:fragment="Menu-Sidebar">
+		
+			<ul class="flex-column">
+				<div th:replace="~{::MenuItems}" ></div>
+			</ul>
+		
+	</div>
+
+</body>
+
+</html>
