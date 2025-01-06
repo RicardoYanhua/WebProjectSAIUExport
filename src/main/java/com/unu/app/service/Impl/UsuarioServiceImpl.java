@@ -10,7 +10,7 @@ import com.unu.app.entity.Usuario;
 import com.unu.app.repository.UsuarioRepository;
 import com.unu.app.service.UsuarioService;
 
-@Service("usuarioservice")
+@Service("usuarioService")
 public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Autowired
@@ -32,7 +32,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 		if(usuarioRepository.existsById(id)) {
 			usuarioRepository.deleteById(id);
 		}
-		
+	}
+
+	@Override
+	public Usuario ObtenerUsuario(String ususario, String contrasenia) {
+		return usuarioRepository.EncontrarUusario(ususario, contrasenia);
 	}
 
 }

@@ -1,3 +1,5 @@
+
+//InsertarClienteScript.js
 // Cargar los departamentos al cargar la página
 $(document).ready(function() {
 	
@@ -8,7 +10,7 @@ $(document).ready(function() {
 		departamentosSelect.append('<option disabled selected value="">Seleccione una opción...</option>');
 		data.forEach(function(departamento) {
 			departamentosSelect.append(
-				`<option value="${departamento.id}">${departamento.name}</option>`
+				`<option value="${departamento.id}" >${departamento.name}</option>`
 			);
 		});
 	});
@@ -63,3 +65,8 @@ $(document).ready(function() {
 		}
 	});
 });
+
+
+
+
+

@@ -2,6 +2,7 @@ package com.unu.app.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.unu.app.entity.Cliente;
-import com.unu.app.entity.GeoClient.Departamento;
-import com.unu.app.entity.GeoClient.Distrito;
-import com.unu.app.entity.GeoClient.Provincia;
+import com.unu.app.entity.Ubicacion.Departamento;
+import com.unu.app.entity.Ubicacion.Distrito;
+import com.unu.app.entity.Ubicacion.GeoClientService;
+import com.unu.app.entity.Ubicacion.Provincia;
 import com.unu.app.service.ClienteService;
-import com.unu.app.service.GeoClientService;
 
 @Controller
 @RestController
@@ -31,6 +33,7 @@ class Ubicacion {
 	
 	@Autowired
 	private GeoClientService dataService;
+	
 	@GetMapping("/getDepartamentos")
     public List<Departamento> getDepartamentos() throws IOException {
         return dataService.getDepartamentos();
@@ -55,13 +58,27 @@ public class ClienteController {
 	@Autowired
 	@Qualifier("clienteService")
 	private ClienteService clienteService;
-
 	
 	@GetMapping("/NuevoCliente")
-	public ModelAndView NuevoCliente()throws IOException {
+	public ModelAndView NuevoCliente(){
 		ModelAndView modelAndView = new ModelAndView("/Clientes/InsertarCliente");
 		modelAndView.addObject("Cliente", new Cliente());
 		return modelAndView;
+	}
+	
+	@GetMapping("/ObtenerCliente/{id}")
+	public ModelAndView EditarCliente(@PathVariable(name = "id") int id){
+		ModelAndView modelAndView = new ModelAndView("/Clientes/EditarCliente");
+		Cliente ObtenerCliente = clienteService.ObtenerCliente(id);
+		modelAndView.addObject("ClienteEditar", ObtenerCliente);   
+		return modelAndView;
+	}
+	
+	@PostMapping("/ActualizarCliente/{id}")
+	public String ActualizarCliente(@PathVariable(name = "id") int id, @ModelAttribute(name = "ClienteEditar") Cliente cliente) {
+		clienteService.ActualizarCliente(cliente);
+		return "redirect:/Dashboard/Clientes/ListaClientes";
+		
 	}
 	
 	@PostMapping("/InsertarCliente")
@@ -90,4 +107,6 @@ public class ClienteController {
 		clienteService.EliminarCliente(id);
 		return "redirect:/Dashboard/Clientes/ListaClientes";
 	}
+	
+	 
 }

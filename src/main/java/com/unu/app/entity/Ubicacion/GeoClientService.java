@@ -1,13 +1,10 @@
-package com.unu.app.service;
+package com.unu.app.entity.Ubicacion;
 
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.unu.app.entity.GeoClient.Departamento;
-import com.unu.app.entity.GeoClient.Distrito;
-import com.unu.app.entity.GeoClient.Provincia;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,19 +18,19 @@ public class GeoClientService {
     private ObjectMapper objectMapper = new ObjectMapper();
     
     public List<Departamento> getDepartamentos() throws IOException {
-        ClassPathResource resource = new ClassPathResource("GeoName/ubigeo_peru_2016_departamentos.json");
+        ClassPathResource resource = new ClassPathResource("Ubicacion/ubigeo_peru_2016_departamentos.json");
         byte[] jsonData = Files.readAllBytes(Paths.get(resource.getURI()));
         return objectMapper.readValue(jsonData, objectMapper.getTypeFactory().constructCollectionType(List.class, Departamento.class));
     }
 
     public List<Provincia> getProvincias() throws IOException {
-        ClassPathResource resource = new ClassPathResource("GeoName/ubigeo_peru_2016_provincias.json");
+        ClassPathResource resource = new ClassPathResource("Ubicacion/ubigeo_peru_2016_provincias.json");
         byte[] jsonData = Files.readAllBytes(Paths.get(resource.getURI()));
         return objectMapper.readValue(jsonData, objectMapper.getTypeFactory().constructCollectionType(List.class, Provincia.class));
     }
 
     public List<Distrito> getDistritos() throws IOException {
-        ClassPathResource resource = new ClassPathResource("GeoName/ubigeo_peru_2016_distritos.json");
+        ClassPathResource resource = new ClassPathResource("Ubicacion/ubigeo_peru_2016_distritos.json");
         byte[] jsonData = Files.readAllBytes(Paths.get(resource.getURI()));
         return objectMapper.readValue(jsonData, objectMapper.getTypeFactory().constructCollectionType(List.class, Distrito.class));
     }
@@ -42,6 +39,30 @@ public class GeoClientService {
         return getDepartamentos().stream()
                          .filter(departamento -> departamento.getId().equals(departamentoId))
                          .findFirst().orElse(null);
+    }
+    
+    public String getDepartamentoNameById(String id) throws IOException {
+        return getDepartamentos().stream()
+                                 .filter(departamento -> departamento.getId().equals(id))
+                                 .findFirst()
+                                 .map(Departamento::getName)  // Si el departamento está presente, se devuelve el nombre
+                                 .orElse("Desconocido");      // Si no se encuentra, se devuelve un valor por defecto
+    }
+    
+    public String getProvinciaNameById(String id) throws IOException {
+        return getProvincias().stream()
+                                 .filter(provincia -> provincia.getId().equals(id))
+                                 .findFirst()
+                                 .map(Provincia::getName)  // Si el departamento está presente, se devuelve el nombre
+                                 .orElse("Desconocido");      // Si no se encuentra, se devuelve un valor por defecto
+    }
+    
+    public String getDistritoNameById(String id) throws IOException {
+        return getDistritos().stream()
+                                 .filter(distrito -> distrito.getId().equals(id))
+                                 .findFirst()
+                                 .map(Distrito::getName)  // Si el departamento está presente, se devuelve el nombre
+                                 .orElse("Desconocido");      // Si no se encuentra, se devuelve un valor por defecto
     }
     
     public Provincia getProcinciaById(String procinciaId) throws IOException {

@@ -21,7 +21,6 @@
 <link href="/Styles/MenuStyle.css" rel="stylesheet">
 <link href="/Styles/InsertarClienteStyle.css" rel="stylesheet">
 <link href="/Styles/ButtonStyle.css" rel="stylesheet">
-<link href="/Styles/TableStyle.css" rel="stylesheet">
 <link href="/Styles/InputStyle.css" rel="stylesheet">
 
 <!-- Scripts -->
@@ -45,82 +44,90 @@
 		<!-- Body -->
 		<div class="Body-container overflow-y-auto">
 			<form th:action="@{/Dashboard/Clientes/InsertarCliente}"
-				th:object="${Cliente}" method="post" id="FormCliente">
-				<h3 class="mb-5 lead fw-bold text-center fs-4">NUEVO CLIENTE</h3>
+				 method="post" id="FormCliente">
+				<h3 class="mb-3 lead fw-bold text-center fs-4">Realizar venta</h3>
 
-				<div class="Form-container">
+
 				
-					<!-- Datos del Cliente -->
-					<div>
-						<h5 class="border-bottom border-2 pb-2 mb-3 text-center fw-bold">Datos
-							del cliente</h5>
-						<div class="ms-3 px-4">
-							<div class="mb-2">
-								<label for="InputDniCliente"
-									class="form-label fw-bold fs-6 mb-0">DNI</label> <input
-									type="text" class="form-control" th:field="*{dni}"
-									id="InputDniCliente" placeholder="Insertar DNI 12345678">
+				
+					
+					<div >
+						<h6 class="border-bottom border-primary border-2 pb-2 mb-3 text-primary text-start fw-bold">Datos
+							del cliente</h6>
+							
+							<div class = "d-flex gap-4">
+							
+								
+								
+								<input class="form-control" list="datalistOptions" data-bs-toggle="dropdown" aria-expanded="false"placeholder="Buscar Cliente...">
+								
+								<datalist id="datalistOptions">
+								  <option  th:each= "cliente : ${ListaClientes}"  
+									th:value= "${cliente.id}" 
+									th:text= "${cliente.nombre}"></option>
+								</datalist>
+								
+								
+								
+								
+								<button class = "btn btn-outline-primary px-4 py-2 rounded-pill text-nowrap"> Nuevo Cliente</button>
+								
 							</div>
-							<div class="mb-2">
-								<label for="InputNombreCliente"
-									class="form-label fw-bold fs-6 mb-0">Nombres</label> <input
-									type="text" class="form-control" th:field="*{nombre}"
-									id="InputNombreCliente" placeholder="Insertar nombres">
-							</div>
-							<div class="mb-2">
-								<label for="InputApellidoCliente"
-									class="form-label fw-bold fs-6 mb-0">Apellidos</label> <input
-									type="text" class="form-control" th:field="*{apellido}"
-									id="InputApellidoCliente" placeholder="Insertar apellidos">
-							</div>
-							<div class="mb-2">
-								<label for="InputCorreoCliente"
-									class="form-label fw-bold fs-6 mb-0">Correo</label> <input
-									type="text" class="form-control" th:field="*{correo}"
-									id="InputCorreoCliente" placeholder="Insertar correo">
-							</div>
-							<div class="mb-2">
-								<label for="InputTelefonoCliente"
-									class="form-label fw-bold fs-6 mb-0">Teléfono</label> <input
-									type="text" pattern="^\+?[0-9\s\-]+$" class="form-control"
-									th:field="*{telefono}" id="InputTelefonoCliente"
-									placeholder="Insertar teléfono">
-							</div>
+
+					</div>
+					
+					<div class = "d-flex justify-content-between align-items-center border-bottom border-primary border-2 mt-3 mb-3">
+						<h6 class=" text-primary text-start fw-bold">Datos de la venta</h6>
+						<div class = "d-flex gap-4">
+							<span class = "text-primary">01/07/2025 hh:mm:ss</span>
+							<span class = "text-primary">N° 00001-3434</span>
 						</div>
+						
+					</div>
+					
+					<div class = "d-flex gap-3">
+					
+					<input class="form-control" list="datalistOptions" data-bs-toggle="dropdown" aria-expanded="false"placeholder="Buscar Producto...">
+								
+								<datalist id="datalistOptions">
+								  <option  th:each= "cliente : ${ListaClientes}"  
+									th:value= "${cliente.id}" 
+									th:text= "${cliente.nombre}"></option>
+								</datalist>
+					<button class = "btn btn-outline-primary px-4 py-2 rounded-pill text-nowrap"> Agregar</button>
+					
+					</div>			
+					
+					<h6 class="border-bottom border-primary border-2 pb-2 mb-3 mt-4 text-primary text-start fw-bold">Detalle Venta</h6>
+					
+					<table class = "table">
+						
+						<thead>
+							<tr>
+								<th>N°</th>
+								<th>Codigo</th>
+								<th>Descricpion</th>
+								<th>Cantidad</th>
+								<th>Precio.Unitario</th>
+								<th>Importe</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+						
+						</tbody>
+						
+						
+					</table>
+					
+					<div class = "d-flex justify-content-end align-items-center gap-4">
+						<h6>Importe total:</h6> 
+						<span>$0.00</span>
 					</div>
 
-					<!-- Ubicación -->
-					<div>
-						<h5 class="border-bottom border-2 pb-2 mb-3 text-center fw-bold">Ubicación</h5>
-						<div class="ms-3 px-4">
-
-							<label for="departamentosSelect" class="form-label fw-bold fs-6">Departamentos</label>
-							<select id="departamentosSelect" class="form-select"
-								th:field="*{id_departamento}">
-								<option disabled selected value="">Seleccione una
-									opción...</option>
-							</select> <label for="provinciasSelect" class="form-label fw-bold fs-6">Provincia</label>
-							<select id="provinciasSelect" class="form-select"
-								th:field="*{id_provincia}">
-								<option disabled selected value="">Seleccione una
-									opción...</option>
-							</select> <label for="distritosSelect" class="form-label fw-bold fs-6">Distrito</label>
-							<select id="distritosSelect" class="form-select"
-								th:field="*{id_distrito}">
-								<option disabled selected value="">Seleccione una
-									opción...</option>
-							</select>
-
-							<div class="mb-3">
-								<label for="InputDireccionCliente"
-									class="form-label fw-bold fs-6 mb-0">Dirección del
-									cliente</label> <input type="text" class="form-control"
-									id="InputDireccionCliente" th:field="*{direccion}"
-									placeholder="Insertar dirección">
-							</div>
-						</div>
-					</div>
-				</div>
+					
+					
 
 				<!-- Botones -->
 				<div>
@@ -235,7 +242,7 @@
 
 
 	<script>
-        setActiveByIndex(0);
+        setActiveByIndex(2);
     </script>
 </body>
 

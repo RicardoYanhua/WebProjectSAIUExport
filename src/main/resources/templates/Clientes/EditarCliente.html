@@ -28,7 +28,6 @@
 <script src="/Scripts/InputScript.js"></script>
 <script src="/Scripts/MenuScript.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="/Scripts/InsertarClienteScript.js"></script>
 </head>
 
 <body>
@@ -44,9 +43,9 @@
 
 		<!-- Body -->
 		<div class="Body-container overflow-y-auto">
-			<form th:action="@{/Dashboard/Clientes/InsertarCliente}"
-				th:object="${Cliente}" method="post" id="FormCliente">
-				<h3 class="mb-5 lead fw-bold text-center fs-4">NUEVO CLIENTE</h3>
+			<form th:action="@{/Dashboard/Clientes/ActualizarCliente/{id}(id=${ClienteEditar.id})}"
+				th:object="${ClienteEditar}" method="post" id="FormCliente">
+				<h3 class="mb-5 lead fw-bold text-center fs-4">EDITAR CLIENTE</h3>
 
 				<div class="Form-container">
 				
@@ -58,7 +57,7 @@
 							<div class="mb-2">
 								<label for="InputDniCliente"
 									class="form-label fw-bold fs-6 mb-0">DNI</label> <input
-									type="text" class="form-control" th:field="*{dni}"
+									type="text" class="form-control" th:field="*{dni}" 
 									id="InputDniCliente" placeholder="Insertar DNI 12345678">
 							</div>
 							<div class="mb-2">
@@ -93,12 +92,19 @@
 					<div>
 						<h5 class="border-bottom border-2 pb-2 mb-3 text-center fw-bold">Ubicación</h5>
 						<div class="ms-3 px-4">
-
+						
+						
+							<input type="hidden" id="idDepartamentoSeleccionado" th:value="${ClienteEditar.id_departamento}" />
+							<input type="hidden" id="idProvinciaSeleccionado" th:value="${ClienteEditar.id_provincia}" />
+							<input type="hidden" id="idDistritoSeleccionado" th:value="${ClienteEditar.id_distrito}" />
+							
+							
 							<label for="departamentosSelect" class="form-label fw-bold fs-6">Departamentos</label>
 							<select id="departamentosSelect" class="form-select"
-								th:field="*{id_departamento}">
+									th:field="*{id_departamento}">
 								<option disabled selected value="">Seleccione una
 									opción...</option>
+									
 							</select> <label for="provinciasSelect" class="form-label fw-bold fs-6">Provincia</label>
 							<select id="provinciasSelect" class="form-select"
 								th:field="*{id_provincia}">
@@ -127,9 +133,9 @@
 					<h5 class="border-bottom border-2 pb-2 mb-3 text-end"></h5>
 					<div class="d-flex justify-content-end gap-3 mt-4">
 						<a class="btn btn-outline-primary py-2 px-4 rounded-pill"
-							type="button" th:href="@{/Dashboard/Clientes/ListaClientes}">Volver</a>
+							type="button" th:href="@{/Dashboard/Clientes/ListaClientes}">Cancelar</a>
 						<button type="submit"
-							class="btn btn-primary py-2 px-5 rounded-pill">Guardar</button>
+							class="btn btn-primary py-2 px-5 rounded-pill">Guardar cambios</button>
 					</div>
 				</div>
 			</form>
@@ -138,16 +144,15 @@
 
 	<!-- Toast -->
 	<div
-		class="toast-container position-fixed w-100 top-0 start-0 p-4 mt-3 d-flex align-items-center justify-content-center">
+		class="toast-container position-fixed w-100 bottom-0 start-0 p-4 mt-3 d-flex align-items-center justify-content-center">
 		<div id="validationToast" class="toast text-bg-danger border-0"
 			role="alert" aria-live="assertive" aria-atomic="true">
 			<div class="d-flex">
 				<div class="toast-body fw-bold" id="toastMessage">
 					<!-- Mensaje dinámico se mostrará aquí -->
 				</div>
-				<!--
 				<button type="button" class="btn-close btn-close-white me-2 m-auto"
-					data-bs-dismiss="toast" aria-label="Close"></button> -->
+					data-bs-dismiss="toast" aria-label="Close"></button>
 			</div>
 		</div>
 	</div>
@@ -232,7 +237,131 @@
     });
 </script>
 
+<script>
 
+$(document).ready(function () {
+    // Obtener los departamentos
+    $.get('/Ubicaciones/getDepartamentos', function (data) {
+        const departamentosSelect = $('#departamentosSelect');
+        departamentosSelect.empty();
+        departamentosSelect.append('<option disabled selected value="">Seleccione una opción...</option>');
+        
+        data.forEach(function (departamento) {
+            departamentosSelect.append(
+                `<option value="${departamento.id}">${departamento.name}</option>`
+            );
+        });
+
+        // Obtener el valor de id_departamento de Thymeleaf o de un campo oculto
+        const idDepartamentoSeleccionado = $('#idDepartamentoSeleccionado').val();
+        
+        // Si existe un id_departamento, seleccionarlo en el select
+        if (idDepartamentoSeleccionado) {
+            departamentosSelect.val(idDepartamentoSeleccionado).change();
+
+            // Cargar las provincias basadas en el departamento seleccionado
+            $.get('/Ubicaciones/getProvincias', { ID: idDepartamentoSeleccionado }, function (provinciasData) {
+                const provinciasSelect = $('#provinciasSelect');
+                provinciasSelect.empty();
+                provinciasSelect.append('<option disabled selected value="">Seleccione una opción...</option>');
+                
+                provinciasData.forEach(function (provincia) {
+                    provinciasSelect.append(
+                        `<option value="${provincia.id}">${provincia.name}</option>`
+                    );
+                });
+
+                // Obtener el valor de id_provincia de Thymeleaf o de un campo oculto
+                const idProvinciaSeleccionada = $('#idProvinciaSeleccionado').val();
+
+                // Si existe un id_provincia, seleccionarlo
+                if (idProvinciaSeleccionada) {
+                    provinciasSelect.val(idProvinciaSeleccionada).change();
+
+                    // Cargar los distritos basados en la provincia seleccionada
+                    $.get('/Ubicaciones/getDistritos', { ID: idProvinciaSeleccionada }, function (distritosData) {
+                        const distritosSelect = $('#distritosSelect');
+                        distritosSelect.empty();
+                        distritosSelect.append('<option disabled selected value="">Seleccione una opción...</option>');
+                        
+                        distritosData.forEach(function (distrito) {
+                            distritosSelect.append(
+                                `<option value="${distrito.id}">${distrito.name}</option>`
+                            );
+                        });
+
+                        // Obtener el valor de id_distrito de Thymeleaf o de un campo oculto
+                        const idDistritoSeleccionado = $('#idDistritoSeleccionado').val();
+
+                        // Si existe un id_distrito, seleccionarlo
+                        if (idDistritoSeleccionado) {
+                            distritosSelect.val(idDistritoSeleccionado);
+                        }
+                    }).fail(function () {
+                        alert('Error al cargar los distritos.');
+                    });
+                }
+            }).fail(function () {
+                alert('Error al cargar las provincias.');
+            });
+        }
+    }).fail(function () {
+        alert('Error al cargar los departamentos.');
+    });
+
+    // Actualizar las provincias al seleccionar un departamento
+    $('#departamentosSelect').change(function () {
+        const departamentoId = $(this).val(); // Obtener el ID del departamento seleccionado
+
+        if (departamentoId) {
+            $.get('/Ubicaciones/getProvincias', { ID: departamentoId }, function (data) {
+                const provinciasSelect = $('#provinciasSelect');
+                provinciasSelect.empty();
+                provinciasSelect.append('<option disabled selected value="">Seleccione una opción...</option>');
+                data.forEach(function (provincia) {
+                    provinciasSelect.append(
+                        `<option value="${provincia.id}">${provincia.name}</option>`
+                    );
+                });
+
+                // Reiniciar el select de distritos cuando cambie el departamento
+                $('#distritosSelect').empty().append('<option disabled selected value="">Seleccione una opción...</option>');
+            }).fail(function () {
+                alert('Error al cargar las provincias.');
+            });
+        } else {
+            // Reiniciar provincias y distritos si no hay selección
+            $('#provinciasSelect').empty().append('<option disabled selected value="">Seleccione una opción...</option>');
+            $('#distritosSelect').empty().append('<option disabled selected value="">Seleccione una opción...</option>');
+        }
+    });
+
+    // Actualizar los distritos al seleccionar una provincia
+    $('#provinciasSelect').change(function () {
+        const provinciaId = $(this).val(); // Obtener el ID de la provincia seleccionada
+
+        if (provinciaId) {
+            $.get('/Ubicaciones/getDistritos', { ID: provinciaId }, function (data) {
+                const distritosSelect = $('#distritosSelect');
+                distritosSelect.empty();
+                distritosSelect.append('<option disabled selected value="">Seleccione una opción...</option>');
+                data.forEach(function (distrito) {
+                    distritosSelect.append(
+                        `<option value="${distrito.id}">${distrito.name}</option>`
+                    );
+                });
+            }).fail(function () {
+                alert('Error al cargar los distritos.');
+            });
+        } else {
+            // Reiniciar distritos si no hay selección
+            $('#distritosSelect').empty().append('<option disabled selected value="">Seleccione una opción...</option>');
+        }
+    });
+});
+
+
+</script>
 
 	<script>
         setActiveByIndex(0);

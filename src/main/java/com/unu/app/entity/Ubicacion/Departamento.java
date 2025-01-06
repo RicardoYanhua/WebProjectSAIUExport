@@ -1,4 +1,4 @@
-package com.unu.app.entity.GeoClient;
+package com.unu.app.entity.Ubicacion;
 
 public class Departamento {
 

@@ -31,5 +31,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Serializable> 
 			+ "(c.apellido LIKE CONCAT(:busqueda, '%')) OR "
 			+ "(c.correo LIKE CONCAT(:busqueda, '%')) OR " + "(c.telefono LIKE CONCAT(:busqueda, '%'))")
 	public Page<Cliente> buscarByAll(Pageable pageable,  @Param("busqueda") String busqueda);
+	
+	@Query("SELECT new Cliente(c.id,c.nombre,c.apellido) FROM Cliente c ")
+	public List<Cliente> getListClientesNameAndId();
 
 }

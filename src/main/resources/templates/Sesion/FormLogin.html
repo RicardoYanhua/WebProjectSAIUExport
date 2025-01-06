@@ -9,7 +9,7 @@
 	<div th:fragment="FormLogin" class = "Container-Login">
 		<div class="container bg-blur rounded-3 px-5 py-5">
 		
-			<form th:action="@{/login/redirect-dashboard}">
+			<form th:action="@{/login/IniciarSesion}" th:object="${loginRequest}" method="post">
 			
 				
 				<h1 class = "fs-2 fw-bold">Iniciar Sesion</h1> 
@@ -21,7 +21,7 @@
 
 				<div class="Container-Input">
 					<img src="/SVG/icon-default.svg"> 
-					<input id="Input" type="text" placeholder="IngresarUsuario">
+					<input id="Input" type="text" placeholder="IngresarUsuario" th:field="*{usuario}">
 					<button class="ButtonClear" type="button"></button>
 				</div>
 
@@ -30,9 +30,13 @@
 				
 				<div class="Container-Input">
 					<img src="/SVG/icon-key.svg"> 
-					<input id="InputPassword" type="password" placeholder="IngresarContraseña">
+					<input id="InputPassword" type="password" placeholder="IngresarContraseña" th:field="*{contrasenia}">
 					<button class="ButtonTooglePasswordView" type="button" onclick="ToggleVisibilityPassword(this)"></button>
 				</div>
+				
+				 <div th:if="${error}" >
+			        <h6 class = "py-2 text-danger lead fs-6" th:text="${error}"></h6>
+			    </div>
 
 
 				<div class="d-flex align-items-center mt-4">

@@ -1,6 +1,12 @@
 package com.unu.app.entity;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.unu.app.entity.Ubicacion.Departamento;
+import com.unu.app.entity.Ubicacion.GeoClientService;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "clientes")
@@ -48,6 +55,12 @@ public class Cliente {
 	@Column(name = "fecha_registro")
 	private LocalDateTime fecha_registro;
 	
+	public Cliente(int id, String nombre, String apellido) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+	}
+	
 	public Cliente() {
 		this(0,"","","","","","","","","",LocalDateTime.now());
 	}
@@ -68,7 +81,28 @@ public class Cliente {
 		this.direccion = direccion;
 		this.fecha_registro = fecha_registro;
 	}
-
+	
+	@Transient
+	private String NombreDepartamento = "Desconocido";
+	@Transient
+	private String NombreProvincia = "Desconocido";
+	@Transient
+	private String NombreDistrito = "Desconocido";
+	
+	public void setNombreDepartamento(String name) {
+		this.NombreDepartamento = name;
+	}
+	public void setNombreProvincia(String name) {
+		this.NombreProvincia = name;
+	}
+	public void setNombreDistrito(String name) {
+		this.NombreDistrito = name;
+	}
+	
+	public String getUbicacion() {
+		return "" + NombreDepartamento + " " + NombreProvincia + " " + NombreDistrito;
+	}
+	
 	public int getId() {
 		return id;
 	}

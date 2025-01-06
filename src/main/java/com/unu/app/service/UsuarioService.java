@@ -8,5 +8,6 @@ public interface UsuarioService {
 	public abstract List<Usuario> ListaUsuarios();
 	public abstract Usuario InsertarUsuario(Usuario usuario);
 	public abstract void EliminarUsuario(int id);
+	public abstract Usuario ObtenerUsuario(String ususario, String contrasenia);
 
 }

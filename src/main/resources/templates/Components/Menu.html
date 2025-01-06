@@ -16,14 +16,14 @@
 		</li>
 		
 		<li class="nav-item">
-			<a class="nav-link"> 
+			<a class="nav-link" th:href="@{/Dashboard/redirect-producto}"> 
 				<img src="/SVG/menu_productos.svg" alt="ProductosIcon"> 
 				<span>Productos</span>
 			</a>
 		</li>
 		
 		<li class="nav-item">
-			<a class="nav-link">
+			<a class="nav-link" th:href="@{/Dashboard/redirect-venta}">
 				<img src="/SVG/menu_ventas.svg" alt="VentasIcon"> 
 				<span>Ventas</span>
 			</a>
@@ -43,20 +43,22 @@
 			</a>
 		</li>
 		
+		<li class="nav-item">
+			<a class="nav-link" th:href="@{/Dashboard/redirect-cuenta}"> 
+				<img src="/SVG/menu_cuenta.svg" alt="SesionIcon" class="menu-icon"> 
+				<span>Cuenta</span>
+			</a>
+		</li>
+		
 	</div>
 
 
 	<div th:fragment="Menu-Header">
-	
 		<nav class="navbar bg-white py-3">
-		
 			<div class="container-fluid  px-4" >
-			
 				<div class = "d-flex flex-wrap align-content-center justify-content-center gap-3">
-					
 					<img src="/SVG/SauiLogo.svg" alt="Logo" width="30" height="24"  class="d-inline-block align-text-top"> 
 					<span class = "fw-bold">SAUI EXPORT</span>
-					
 					<button id="toggle-menu-button" class="ButtonMenuToggle"
 							onclick="ToggleMenuAction()"></button>
 				</div>
@@ -70,11 +72,8 @@
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarNav">
-
-					<ul class="navbar-nav">
-
+					<ul >
 						<div th:replace="~{::MenuItems}"></div>
-
 					</ul>
 				</div>
 
@@ -82,12 +81,13 @@
 		</nav>
 	</div>
 	
-	<div th:fragment="Menu-Sidebar">
-		
-			<ul class="flex-column">
+	<div th:fragment="Menu-Sidebar" >
+			<ul>
 				<div th:replace="~{::MenuItems}" ></div>
 			</ul>
-		
+			
+			
+			
 	</div>
 
 </body>

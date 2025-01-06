@@ -18,6 +18,21 @@ public class DashboardController {
 		return "redirect:/Dashboard/Clientes/ListaClientes";
     }
 	
+	@GetMapping("/redirect-producto")
+    public String MostrarHTML_Producto() {
+		return "redirect:/Dashboard/Productos/ListaProductos";
+    }
+	
+	@GetMapping("/redirect-cuenta")
+    public String MostrarHTML_Cuenta() {
+		return "redirect:/Dashboard/Cuenta/VerCuenta";
+    }
+	
+	@GetMapping("/redirect-venta")
+    public String MostrarHTML_Venta() {
+		return "redirect:/Dashboard/Ventas/ListaVentas";
+    }
+	
 	
 	
 }

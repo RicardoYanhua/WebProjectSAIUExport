@@ -87,14 +87,18 @@ body{
 
 ul {
 	list-style-type: none;
+	
 	margin: 0;
 	padding: 0;
+	
 }
 		
 ul li {
-	margin: 3px 0;
+	margin: 5px 0;
 	text-align: left;
-}	
+	
+}
+
 
 .nav-item .nav-link img{
 	width: 25px;
@@ -117,6 +121,7 @@ ul li {
 	gap:20px;
 	transition: background-color 0.3s ease;
 }
+
 
 .nav-link.active{
 	background-color: var(--MenuItemBackgroundColorSelected);
