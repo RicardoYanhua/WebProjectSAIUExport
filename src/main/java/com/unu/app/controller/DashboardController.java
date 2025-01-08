@@ -20,6 +20,11 @@ public class DashboardController {
 		return "redirect:/Clientes/ListaClientes";
     }
 	
+	@GetMapping("/redirect-ayuda")
+    public String MostrarHTML_Ayuda() {
+		return "/Info/InfoAyuda";
+    }
+	
 	@GetMapping("/redirect-producto")
     public String MostrarHTML_Producto() {
 		return "redirect:/Productos/ListaProductos";

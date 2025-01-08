@@ -24,6 +24,8 @@
 <link href="/Styles/ButtonStyle.css" rel="stylesheet">
 <script src="/Scripts/MenuScript.js"></script>
 
+    <script src="/Scripts/ModalAndToastScript.js"></script>
+
 </head>
 <body>
 
@@ -39,7 +41,7 @@
 
 
 
-			<h3 class="fs-3 fw-bold">Ventas</h3>
+			<h3 class="fs-3 fw-bold">Compras</h3>
 			<span class="lead fs-6"> La palabra venta se refiere al acto o
 				proceso mediante el cual se intercambia un bien o servicio por un
 				valor monetario. Es una transacción en la que el vendedor ofrece un
@@ -88,9 +90,13 @@
 						<td th:text="${compra.fecha_compra}"></td>
 						<!-- Precio del producto con formato -->
 						<td>
-							<!-- Enlace para editar el producto --> <a
-							class="btn-icon icon-delete" type="button"></a>
-
+							 <button type="button" class="btn-icon icon-delete" data-bs-toggle="modal" 
+                                        data-bs-target="#MessageConfirmModal" th:data-id="${compra.id}"
+                                        data-title="Confirmar eliminación" data-body="¿Estás seguro de que deseas eliminar esta compra ?"
+                                        data-url="/Compras/EliminarCompra">
+                                </button>
+                                <!-- Modal para confirmar eliminación -->
+                <div th:insert="Components/ModalAndToast :: Modal-ConfirmMessage"></div>
 
 
 						</td>

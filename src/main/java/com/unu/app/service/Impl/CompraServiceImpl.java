@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.unu.app.entity.Cliente;
 import com.unu.app.entity.Compra;
 import com.unu.app.entity.DetalleCompra;
 import com.unu.app.entity.Producto;
@@ -56,12 +57,16 @@ public class CompraServiceImpl implements CompraService {
 	@Override
 	public void ActualizarCompra(Compra compra) {
 		compraRepository.save(compra);
-		
 	}
 
 	@Override
 	public int getLastId() {
 		return compraRepository.ObtenerUltimoId();
+	}
+
+	@Override
+	public List<Compra> getListaCompraByIdCliente(Cliente cliente) {
+		return compraRepository.getListaCompraByIdCliente(cliente);
 	}
 
 	

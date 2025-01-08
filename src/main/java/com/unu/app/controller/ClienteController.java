@@ -22,6 +22,7 @@ import com.unu.app.entity.Ubicacion.Distrito;
 import com.unu.app.entity.Ubicacion.GeoClientService;
 import com.unu.app.entity.Ubicacion.Provincia;
 import com.unu.app.service.ClienteService;
+import com.unu.app.service.CompraService;
 
 @Controller
 @RestController
@@ -55,6 +56,10 @@ public class ClienteController {
 	@Qualifier("clienteService")
 	private ClienteService clienteService;
 	
+	@Autowired
+	@Qualifier("compraService")
+	private CompraService compraService;
+	
 	@GetMapping("/NuevoCliente")
 	public ModelAndView NuevoCliente(){
 		ModelAndView modelAndView = new ModelAndView("/Clientes/InsertarCliente");
@@ -67,6 +72,16 @@ public class ClienteController {
 		ModelAndView modelAndView = new ModelAndView("/Clientes/EditarCliente");
 		Cliente ObtenerCliente = clienteService.ObtenerCliente(id);
 		modelAndView.addObject("ClienteEditar", ObtenerCliente);   
+		return modelAndView;
+	}
+	
+	@GetMapping("/VerDatosCliente/{id}")
+	public ModelAndView VerDatosCliente(@PathVariable(name = "id") int id){
+		ModelAndView modelAndView = new ModelAndView("/Clientes/VerDatosCliente");
+		Cliente ObtenerCliente = clienteService.ObtenerCliente(id);
+		modelAndView.addObject("DatosCliente", ObtenerCliente); 
+		modelAndView.addObject("ListaCompras",compraService.getListaCompraByIdCliente(ObtenerCliente));
+		
 		return modelAndView;
 	}
 	
