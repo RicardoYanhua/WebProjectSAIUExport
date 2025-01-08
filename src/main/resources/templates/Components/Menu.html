@@ -9,21 +9,21 @@
 	<div th:fragment="MenuItems" class = "MenuItems">
 	
 		<li class="nav-item">
-			<a class="nav-link" th:href="@{/Dashboard/redirect-cliente}"> 
+			<a class="nav-link" th:href="@{/redirect-cliente}"> 
 				<img src="/SVG/menu_clientes.svg" alt="ClientesIcon"> 
 				<span>Clientes</span>
 			</a>
 		</li>
 		
 		<li class="nav-item">
-			<a class="nav-link" th:href="@{/Dashboard/redirect-producto}"> 
+			<a class="nav-link" th:href="@{/redirect-producto}"> 
 				<img src="/SVG/menu_productos.svg" alt="ProductosIcon"> 
 				<span>Productos</span>
 			</a>
 		</li>
 		
 		<li class="nav-item">
-			<a class="nav-link" th:href="@{/Dashboard/redirect-venta}">
+			<a class="nav-link" th:href="@{/redirect-compra}">
 				<img src="/SVG/menu_ventas.svg" alt="VentasIcon"> 
 				<span>Ventas</span>
 			</a>
@@ -44,11 +44,20 @@
 		</li>
 		
 		<li class="nav-item">
-			<a class="nav-link" th:href="@{/Dashboard/redirect-cuenta}"> 
+			<a class="nav-link" th:href="@{/redirect-cuenta}"> 
 				<img src="/SVG/menu_cuenta.svg" alt="SesionIcon" class="menu-icon"> 
 				<span>Cuenta</span>
 			</a>
 		</li>
+		<!--  <div th:if="${Permiso}">-->
+			   <li class="nav-item">
+					<a class="nav-link" th:href="@{/redirect-usuario}"> 
+						<img src="/SVG/menu_user.svg" alt="SesionIcon" class="menu-icon"> 
+						<span>Usuarios</span>
+					</a>
+				</li>
+		<!--</div>-->
+		
 		
 	</div>
 
@@ -58,11 +67,9 @@
 			<div class="container-fluid  px-4" >
 				<div class = "d-flex flex-wrap align-content-center justify-content-center gap-3">
 					<img src="/SVG/SauiLogo.svg" alt="Logo" width="30" height="24"  class="d-inline-block align-text-top"> 
-					<span class = "fw-bold">SAUI EXPORT</span>
-					<button id="toggle-menu-button" class="ButtonMenuToggle"
-							onclick="ToggleMenuAction()"></button>
+					<span id= "TextLogo" class = "fw-bold">SAIU EXPORT</span>
+					<button id="ButtonMenuToggle" class="ButtonMenuToggle" onclick="ToggleMenuAction()"></button>
 				</div>
-				
 				
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -85,9 +92,6 @@
 			<ul>
 				<div th:replace="~{::MenuItems}" ></div>
 			</ul>
-			
-			
-			
 	</div>
 
 </body>

@@ -18,7 +18,7 @@ import com.unu.app.entity.Producto;
 import com.unu.app.service.ProductoService;
 
 @Controller
-@RequestMapping("/Dashboard/Productos")
+@RequestMapping("/Productos")
 public class ProductoController {
 	
 	@Autowired
@@ -43,7 +43,7 @@ public class ProductoController {
 	@PostMapping("/InsertarProducto")
 	public String InsertarNuevoCliente(@ModelAttribute(name = "Producto") Producto producto) {
 		productoService.InsertarProducto(producto);
-		return "redirect:/Dashboard/Productos/ListaProductos";
+		return "redirect:/Productos/ListaProductos";
 		
 	}
 	
@@ -58,14 +58,14 @@ public class ProductoController {
 	@PostMapping("/ActualizarProducto/{id}")
 	public String ActualizarCliente(@PathVariable(name = "id") int id, @ModelAttribute(name = "ClienteEditar") Producto producto) {
 		productoService.ActualizarProducto(producto);
-		return "redirect:/Dashboard/Productos/ListaProductos";
+		return "redirect:/Productos/ListaProductos";
 		
 	}
 	
-	@PostMapping("/ElimnarProducto/{id}")
+	@PostMapping("/EliminarProducto/{id}")
 	public String EliminarCliente(@PathVariable(name = "id") int id) {
 		productoService.EliminarProducto(id);
-		return "redirect:/Dashboard/Productos/ListaProductos";
+		return "redirect:/Productos/ListaProductos";
 	}
 
 	

@@ -12,10 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-enum Role {
-    admin,
-    empleado
-}
+
 
 @Entity
 @Table(name = "usuarios")
@@ -41,6 +38,10 @@ public class Usuario {
 		@Column(name = "contrasenia")
 		private String contrasenia;
 		
+		public enum Role {
+		    Administrador,
+		    Empleado
+		}
 		@Enumerated(EnumType.STRING)
 		@Column(name = "rol", nullable = false)
 		private Role rol;
@@ -49,7 +50,7 @@ public class Usuario {
 		private LocalDateTime fecha_registro;
 		
 		public Usuario() {
-			this(0,"","","","","",Role.empleado,LocalDateTime.now());
+			this(0,"","","","","",Role.Empleado,LocalDateTime.now());
 		}
 		
 		public Usuario(int id, String usuario, String nombre, String apellido, String correo, String contrasenia,

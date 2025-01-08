@@ -1,6 +1,8 @@
 package com.unu.app.service.Impl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -48,6 +50,11 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public Page ListaProducto(Pageable pageable) {
 		Page<Producto> listaProductos = productoRepository.findAll(PageRequest.of(pageable.getPageNumber(), 12));
+		return listaProductos;
+	}
+	
+	public List<Producto> getProductos() {
+		List<Producto> listaProductos = productoRepository.findAll();
 		return listaProductos;
 	}
 	

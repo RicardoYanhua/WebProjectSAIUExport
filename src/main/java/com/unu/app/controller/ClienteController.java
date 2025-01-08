@@ -2,7 +2,6 @@ package com.unu.app.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.unu.app.entity.Cliente;
 import com.unu.app.entity.Ubicacion.Departamento;
 import com.unu.app.entity.Ubicacion.Distrito;
@@ -48,11 +45,10 @@ class Ubicacion {
     public List<Distrito> getDistritos(@RequestParam String ID) throws IOException {
         return dataService.getDistritosByProvinciaId(ID);
     }
-	
 }
 
 @Controller
-@RequestMapping("/Dashboard/Clientes")
+@RequestMapping("/Clientes")
 public class ClienteController {
 
 	@Autowired
@@ -77,15 +73,13 @@ public class ClienteController {
 	@PostMapping("/ActualizarCliente/{id}")
 	public String ActualizarCliente(@PathVariable(name = "id") int id, @ModelAttribute(name = "ClienteEditar") Cliente cliente) {
 		clienteService.ActualizarCliente(cliente);
-		return "redirect:/Dashboard/Clientes/ListaClientes";
-		
+		return "redirect:/Clientes/ListaClientes";
 	}
 	
 	@PostMapping("/InsertarCliente")
 	public String InsertarNuevoCliente(@ModelAttribute(name = "Cliente") Cliente cliente) {
 		clienteService.InsertarCliente(cliente);
-		return "redirect:/Dashboard/Clientes/ListaClientes";
-		
+		return "redirect:/Clientes/ListaClientes";
 	}
 	
 	@GetMapping("/ListaClientes")
@@ -102,10 +96,10 @@ public class ClienteController {
 		return modelAndView;
 	}
 
-	@PostMapping("/ElimnarCliente/{id}")
+	@PostMapping("/EliminarCliente/{id}")
 	public String EliminarCliente(@PathVariable(name = "id") int id) {
 		clienteService.EliminarCliente(id);
-		return "redirect:/Dashboard/Clientes/ListaClientes";
+		return "redirect:/Clientes/ListaClientes";
 	}
 	
 	 

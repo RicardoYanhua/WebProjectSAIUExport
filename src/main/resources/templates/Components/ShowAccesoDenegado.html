@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acceso Denegado</title>
+
+</head>
+<body>
+
+
+
+	<div th:fragment="ShowMessageAcesoDenegado" class="container-error">
+		<h1>Acceso Denegado</h1>
+		<p>No tienes los permisos necesarios para acceder a esta página.</p>
+		<style>
+.container-error {
+	text-align: center;
+	width:auto;
+	padding: 30px;
+	border: 2px solid #f5c6cb;
+	background-color: #ffffff;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container-error h1 {
+	font-size: 2rem;
+	margin: 0;
+	color: #dc3545;
+}
+
+.container-error p {
+	font-size: 1.2rem;
+	margin-top: 10px;
+	color: #555;
+}
+
+.container-error a {
+	display: inline-block;
+	margin-top: 20px;
+	padding: 10px 20px;
+	font-size: 1rem;
+	color: #ffffff;
+	background-color: #dc3545;
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+.container-error a:hover {
+	background-color: #c82333;
+}
+</style>
+	</div>
+
+</body>
+</html>

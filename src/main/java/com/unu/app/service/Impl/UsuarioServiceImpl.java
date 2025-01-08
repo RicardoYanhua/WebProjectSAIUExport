@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.unu.app.entity.Cliente;
 import com.unu.app.entity.Usuario;
 import com.unu.app.repository.UsuarioRepository;
 import com.unu.app.service.UsuarioService;
@@ -39,4 +40,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarioRepository.EncontrarUusario(ususario, contrasenia);
 	}
 
+	@Override
+	public Usuario ObtenerUsuario(int id) {
+	    return usuarioRepository.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("UsuARIO no encontrado con ID: " + id));
+	}
+	
+	@Override
+	public void ActualizarUsuario(Usuario usuario) {
+		usuarioRepository.save(usuario);
+	}
 }

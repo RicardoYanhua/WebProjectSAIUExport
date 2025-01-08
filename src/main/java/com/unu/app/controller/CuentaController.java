@@ -13,20 +13,21 @@ import jakarta.servlet.http.HttpSession;
 
 
 @Controller
-@RequestMapping("/Dashboard/Cuenta")
+@RequestMapping("/Cuenta")
 public class CuentaController {
 
-	@GetMapping("/VerCuenta")
+	@GetMapping("/Details")
 	public ModelAndView NuevoCliente(HttpSession session)throws IOException {
 		ModelAndView modelAndView = new ModelAndView("/Cuenta/CuentaDetails");
-		Usuario user = (Usuario) session.getAttribute("user");
+		Usuario user = (Usuario) session.getAttribute("UsuarioLogin");
+		
 		if(user!=null){
 			System.out.println("Usuario existe");
 			modelAndView.addObject("Usuario",user);
 			return modelAndView;
 		}else {
 			System.out.println("Usuario no existe");
-			return new ModelAndView("redirect:/login/form-sesion");
+			return new ModelAndView("redirect:/Login/IniciarSesion");
 		}
 		
 	}

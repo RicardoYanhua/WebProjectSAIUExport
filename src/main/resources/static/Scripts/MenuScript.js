@@ -1,8 +1,11 @@
 function ToggleMenuAction() {
-	const toggleButton = document.getElementById('toggle-menu-button');
 	const menuContainer = document.getElementById('Menu-container');
-	isrotate = toggleButton.classList.toggle('rotate-icon');
-	const ishidden = menuContainer.classList.toggle('hidden');
+	const toggleButton = document.getElementById('ButtonMenuToggle');
+	const textLogoHidden = document.getElementById('TextLogo');
+	
+	toggleButton.classList.toggle('RotateIconButtonMenuToggle');
+	const ishidden = menuContainer.classList.toggle('HiddenMenu');
+	textLogoHidden.classList.toggle('HiddenLogo');
 	
 	localStorage.setItem('menuIsHidden', ishidden);
 }
@@ -32,21 +35,24 @@ window.addEventListener("resize", checkWindowWidth);
 
 document.addEventListener('DOMContentLoaded', () => {
 	const MenuContainer = document.getElementById('Menu-container');
-	const IconTogglerMenu = document.getElementById('toggle-menu-button');
-	
+	const toggleButton = document.getElementById('ButtonMenuToggle');
+	const textLogoHidden = document.getElementById('TextLogo');
 	
 	const isCollapsed = localStorage.getItem('menuIsHidden') === 'true';
 	
+	
 	if (isCollapsed) {
-		MenuContainer.classList.add('hidden');
-		IconTogglerMenu.classList.add('rotate-icon');
+		MenuContainer.classList.add('HiddenMenu');
+		toggleButton.classList.add('RotateIconButtonMenuToggle');
+		textLogoHidden.classList.add('HiddenLogo');
 	} else {
-		MenuContainer.classList.remove('hidden');
-		IconTogglerMenu.classList.remove('rotate-icon');
+		MenuContainer.classList.remove('HiddenMenu');
+		toggleButton.classList.remove('RotateIconButtonMenuToggle');
+		textLogoHidden.classList.remove('HiddenLogo');
 	}
 });
 
-document.getElementById('toggle-menu-button').addEventListener('click', ToggleMenuAction);
+document.getElementById('ButtonMenuToggle').addEventListener('click', ToggleMenuAction);
 
 
 

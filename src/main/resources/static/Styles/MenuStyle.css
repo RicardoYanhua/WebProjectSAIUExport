@@ -4,36 +4,41 @@
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
 :root{
 	--MenuPadding: 15px 10px;
-	
 	--MenuBackgroundColor: rgb(255,255,255);
 	--MenuItemBackgroundColorCursorSelected : rgb(220,220,220);
 	--MenuItemForegroundColorCursorSelected : rgb(34,34,34);
-	
 	--MenuItemBackgroundColorSelected: rgb(34,34,34);
 	--MenuItemForegroundColorSelected: rgb(255,255,255);
-	
 	--MenuBorderContainer: 10px;
+}
 	
-	--BodyBorderPadding: 5px;
-	--BodyBackgroundColor: rgb(60,60,60);
+.Header-container{
+	border-top-left-radius: var(--MenuBorderContainer);
+	border-top-right-radius: var(--MenuBorderContainer);
+	border-bottom:1px solid rgb(170,170,170);
+	overflow: hidden;
 }
-
-body{
-	display:flex;
-	flex-direction:column;
-	height:100vh;
-	padding: var(--BodyBorderPadding);
-	background-color: var(--BodyBackgroundColor);
-	font-family: 'Inter', sans-serif;
-}
+.Main-container{
+	border-bottom-left-radius: var(--MenuBorderContainer);
+	border-bottom-right-radius: var(--MenuBorderContainer);
+	overflow: hidden;
+	display: grid;
+	flex:1;
+	grid-template-columns:auto 1fr;
+}	
 .Menu-container{
 	border-right:1px solid rgb(210,210,210);
 	background-color: var(--MenuBackgroundColor);
 	padding: var(--MenuPadding);
-	width:75px;
-	span{display:none;}
-   	
+	width:220px;
+	
 }
+
+.Body-container{
+	background-color: rgb(255,255,255);
+	padding: 30px 50px;
+}
+
 .ButtonMenuToggle {
 		width: 19px;
 	    height:19px;
@@ -48,72 +53,47 @@ body{
 	    background-size: contain; 
 	    background-position: center; 
 	    background-repeat: no-repeat;
+	    transition: 0.1s ease;
+	    
 }
 
-
-.hidden{
-	span{display:block;}
-	width: 220px;
+.HiddenMenu{
+	span{
+		display:none;
+	}
+	width: 75px;
+}
+.HiddenLogo{
+	display:none;
 }
 
-.ButtonMenuToggle {
-	transition: 0.1s ease;
-}
-.rotate-icon{
+.RotateIconButtonMenuToggle{
 	transform: rotate(-180deg); 
 }
-		
-.Header-container{
-	border-top-left-radius: var(--MenuBorderContainer);
-	border-top-right-radius: var(--MenuBorderContainer);
-	border-bottom:1px solid rgb(170,170,170);
-	overflow: hidden;
-}
-.Main-container{
-	
-	border-bottom-left-radius: var(--MenuBorderContainer);
-	border-bottom-right-radius: var(--MenuBorderContainer);
-	overflow: hidden;
-	
-	display: grid;
-	
-	flex:1;
-	grid-template-columns:auto 1fr;
-}	
-.Body-container{
-	background-color: rgb(255,255,255);
-	padding: 30px 50px;
-}
 
-ul {
+ul{
 	list-style-type: none;
-	
 	margin: 0;
 	padding: 0;
-	
 }
 		
-ul li {
+ul li{
 	margin: 5px 0;
 	text-align: left;
-	
 }
-
 
 .nav-item .nav-link img{
 	width: 25px;
 	height: 25px;
-	
 }
+
 .nav-link{
 	display:flex;
 	width:100%;
 	align-items: center;
-	
 	span{
 		color: var(--MenuItemForegroundColorCursorSelected);
 	}
-	
 	border-radius: 8px;
 	padding: 10px 15px;
 	font-size: 15px;
@@ -121,7 +101,6 @@ ul li {
 	gap:20px;
 	transition: background-color 0.3s ease;
 }
-
 
 .nav-link.active{
 	background-color: var(--MenuItemBackgroundColorSelected);
@@ -145,7 +124,6 @@ ul li {
 	filter: invert(1);
 }
 
-
 @media (min-width: 1024px) {
 	.navbar-toggler{
 	    display:none;
@@ -154,6 +132,7 @@ ul li {
 	.navbar-collapse{
 		transition:all 0s;
 	}
+	
 }
 @media (max-width: 1024px) {
 	.ButtonMenuToggle{
@@ -163,23 +142,23 @@ ul li {
 		display:none;
 		
 	}
+	.HiddenLogo{
+		display:block;
+	}
 	.Body-container{
 		padding: 30px 25px;
 	}
+	
 	.navbar-collapse{
 		margin: 0px 50px;
 		border-radius:10px;
 		padding:15px 10px;
 		border:1px solid rgb(170,170,170);
-		
 		background-color:rgb(255,255,255);
 		position: fixed;
-		
-		top:13%;
+		top:11%;
 		left: 0;
 		right: 0;
-		
-		
 		z-index: 1000;
 	}
 	
