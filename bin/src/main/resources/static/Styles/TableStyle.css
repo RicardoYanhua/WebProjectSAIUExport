@@ -1,0 +1,173 @@
+@charset "UTF-8";
+
+
+.Table-custom {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 14px;
+	overflow: hidden;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+.Table-custom thead {
+	background-color: rgb(27, 153, 94);
+
+	
+	
+}
+
+.Table-custom th {
+	text-align: left;
+	padding: 10px 10px;
+	font-weight: bold;
+	color: rgb(220, 220, 220);
+}
+
+.Table-custom td {
+	text-align: left;
+	color: #1a1a1a;
+	font-size: 12px;
+	overflow: hidden;
+	padding: 7px 10px;
+}
+
+.Table-custom tbody tr {
+	background-color: rgb(255, 255, 255);
+	
+	transition: background-color 0.3s;
+}
+
+.Table-custom tbody tr:nth-child(even) {
+	background-color: rgb(240, 240, 240);
+}
+
+.Table-custom tbody tr:hover {
+	background-color: rgb(232, 247, 232);
+}
+
+@media ( min-width : 1380px) {
+	.Table-custom.Table-productor thead th:nth-child(1), .Table-custom.Table-productor tbody td:nth-child(1)
+		{
+		min-width: 60px;
+		width: auto;
+		max-width: 80px;
+	}
+	.Table-custom.Table-productor thead th:nth-child(2), .Table-custom.Table-productor tbody td:nth-child(2)
+		{
+		min-width: 180px;
+		width: auto;
+		max-width: 200px;
+	}
+	.Table-custom.Table-productor thead th:nth-child(3), .Table-custom.Table-productor tbody td:nth-child(3)
+		{
+		min-width: 180px;
+		width: auto;
+		max-width: 200px;
+	}
+	.Table-custom.Table-productor thead th:nth-child(4), .Table-custom.Table-productor tbody td:nth-child(4)
+		{
+		min-width: 100px;
+		width: auto;
+		max-width: 120px;
+	}
+	.Table-custom.Table-productor thead th:nth-child(5), .Table-custom.Table-productor tbody td:nth-child(5)
+		{
+		min-width: 240px;
+		width: auto;
+		max-width: 260px;
+	}
+	.Table-custom.Table-productor thead th:nth-child(6), .Table-custom.Table-productor tbody td:nth-child(6)
+		{
+		min-width: 200px;
+		width: auto;
+		max-width: 220px;
+	}
+	.Table-custom.Table-productor thead th:nth-child(7), .Table-custom.Table-productor tbody td:nth-child(7)
+		{
+		min-width: 100px;
+		width: auto;
+		max-width: 120px;
+	}
+}
+
+@media ( max-width : 1380px) {
+	.Table-custom {
+		border: none;
+		box-shadow: none;
+		margin-top: 10px;
+	}
+	.Table-custom thead {
+		display: none;
+	}
+	.Table-custom tbody {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+	}
+	.Table-custom tbody tr {
+		overflow: hidden;
+		font-size: 14px;
+		margin-bottom: 5px;
+		border: 1px solid rgb(255,255,255);
+		border-radius: 8px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+	.Table-custom td {
+		display: flex;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		justify-content: space-between;
+		padding: 4px 10px;
+		border: none;
+		border-bottom: 1px solid #ddd;
+	}
+	
+	.Table-custom td:first-child {
+		background-color: rgb(54, 54, 54);
+		color: rgb(255, 255, 255);
+		border-bottom: none;
+		padding: 10px 20px;
+	}
+	
+	.Table-custom tbody tr:hover {
+	background-color: rgb(255,255,255);
+}
+
+.Table-custom tbody tr td{
+	background-color: rgb(255,255,255);
+}
+
+	.Table-custom tr td:first-child::before {
+		background-color: rgb(54, 54, 54);
+		color: rgb(255, 255, 255);
+	}
+	.Table-custom td:last-child {
+		background-color: rgb(84,84,84);
+		border-bottom: none;
+		padding: 10px 20px;
+	}
+	.Table-custom td::before {
+		content: attr(data-label);
+		font-weight: bold;
+		margin-right: 10px;
+		color: #555;
+	}
+	.t{
+		display: block;
+		height: auto;
+	}
+}
+
+@media ( min-width : 744px) and (max-width: 1080px) {
+	.Table-custom tbody {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media ( min-width : 360px) and (max-width: 744px) {
+	.Table-custom tbody {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
