@@ -1,26 +1,13 @@
 package com.unu.app.service.Impl;
 
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
-
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import com.unu.app.entity.Cliente;
+import com.unu.app.entity.Productor;
 import com.unu.app.entity.Compra;
-import com.unu.app.entity.DetalleCompra;
-import com.unu.app.entity.Producto;
 import com.unu.app.repository.CompraRepository;
-import com.unu.app.repository.DetalleCompraRepository;
-import com.unu.app.repository.ProductoRepository;
 import com.unu.app.service.CompraService;
-import com.unu.app.service.DetalleCompraService;
-import com.unu.app.service.ProductoService;
 
 @Service("compraService")
 
@@ -65,7 +52,7 @@ public class CompraServiceImpl implements CompraService {
 	}
 
 	@Override
-	public List<Compra> getListaCompraByIdCliente(Cliente cliente) {
+	public List<Compra> getListaCompraByIdCliente(Productor cliente) {
 		return compraRepository.getListaCompraByIdCliente(cliente);
 	}
 

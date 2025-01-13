@@ -22,7 +22,7 @@ public class Compra {
 	
 	@ManyToOne(fetch = FetchType.LAZY) 
     @JoinColumn(name = "id_cliente")
-	private Cliente id_cliente;
+	private Productor id_cliente;
 	
 	@Column(name = "total")
 	private double total;
@@ -31,10 +31,10 @@ public class Compra {
 	private LocalDateTime fecha_compra;
 
 	public Compra() {
-		this(0,new Cliente(),0.0,LocalDateTime.now());
+		this(0,new Productor(),0.0,LocalDateTime.now());
 	}
 	
-	public Compra(int id, Cliente id_cliente, double total, LocalDateTime fecha_compra) {
+	public Compra(int id, Productor id_cliente, double total, LocalDateTime fecha_compra) {
 		super();
 		this.id = id;
 		this.id_cliente = id_cliente;
@@ -50,11 +50,11 @@ public class Compra {
 		this.id = id;
 	}
 
-	public Cliente getId_cliente() {
+	public Productor getId_cliente() {
 		return id_cliente;
 	}
 
-	public void setId_cliente(Cliente id_cliente) {
+	public void setId_cliente(Productor id_cliente) {
 		this.id_cliente = id_cliente;
 	}
 

@@ -12,25 +12,26 @@
 </script>
 
 <link href="/Styles/MenuStyle.css" rel="stylesheet">
-<link href="/Styles/WindowStyle.css" rel="stylesheet">
 <script src="/Scripts/MenuScript.js"></script>
+<link href="/Styles/ComponentesStyle.css" rel="stylesheet">
 
 </head>
 <body>
 
-	<div th:insert="Components/Menu :: Menu-Header"
-		class="Header-container"></div>
-
-	<div class="Main-container">
-
+	<div class="Container">
 		<div th:insert="Components/Menu :: Menu-Sidebar" id="Menu-container"
 			class="Menu-container"></div>
+		<div class="Main-container">
+			<div th:insert="Components/Menu :: Menu-Header"
+				class="Header-container "></div>
+			<div
+				class="Body-container d-flex align-items-center justify-content-center">
+				<div
+					th:insert="Components/ShowAccesoDenegado :: ShowMessageAcesoDenegado"></div>
 
-		<div class="Body-container overflow-y-auto">
-			
+			</div>
 		</div>
 	</div>
-
 
 </body>
 </html>

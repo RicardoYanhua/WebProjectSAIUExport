@@ -1,97 +1,108 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <title></title>
-
 </head>
 
 <body>
-	<div th:fragment="MenuItems" class = "MenuItems">
-	
-		<li class="nav-item">
-			<a class="nav-link" th:href="@{/redirect-cliente}"> 
-				<img src="/SVG/menu_clientes.svg" alt="ClientesIcon"> 
-				<span>Clientes</span>
-			</a>
-		</li>
-		
-		<li class="nav-item">
-			<a class="nav-link" th:href="@{/redirect-producto}"> 
-				<img src="/SVG/menu_productos.svg" alt="ProductosIcon"> 
-				<span>Productos</span>
-			</a>
-		</li>
-		
-		<li class="nav-item">
-			<a class="nav-link" th:href="@{/redirect-compra}">
-				<img src="/SVG/menu_ventas.svg" alt="VentasIcon"> 
-				<span>Ventas</span>
-			</a>
-		</li>
-		
-		<li class="nav-item">
-			<a class="nav-link"> 
-				<img src="/SVG/menu_reportes.svg" alt="ReportesIcon"> 
-				<span>Reportes</span>
-			</a>
-		</li>
-		
-		<li class="nav-item">
-			<a class="nav-link" th:href="@{/redirect-ayuda}"> 
-				<img src="/SVG/menu_info.svg" alt="AyudaIcon" class="menu-icon"> 
-				<span>Ayuda</span>
-			</a>
-		</li>
-		
-		<li class="nav-item">
-			<a class="nav-link" th:href="@{/redirect-cuenta}"> 
-				<img src="/SVG/menu_cuenta.svg" alt="SesionIcon" class="menu-icon"> 
-				<span>Cuenta</span>
-			</a>
-		</li>
-		<!--  <div th:if="${Permiso}">-->
-			   <li class="nav-item">
-					<a class="nav-link" th:href="@{/redirect-usuario}"> 
-						<img src="/SVG/menu_user.svg" alt="SesionIcon" class="menu-icon"> 
-						<span>Usuarios</span>
-					</a>
-				</li>
-		<!--</div>-->
-		
-		
-	</div>
+	<!-- Fragmento de menú lateral -->
+	<div th:fragment="MenuItems"
+		class="MenuItems h-100 d-flex flex-column justify-content-between">
+		<div class="">
+			<button id="ToggleMenuBtn"
+				class="btn-icon-toggle-menu icon-toggle-menu"
+				onclick="ToggleMenuAction()"></button>
 
+			<div id="LogoContainer" class="Logo-container">
+				<img src="/SVG/SauiLogo.svg" alt="Logo" width="24" height="24">
+				<span id="TextLogo" class="text-nowrap text-dark fw-bold">SAIU
+					EXPORT</span>
+			</div>
 
-	<div th:fragment="Menu-Header">
-		<nav class="navbar bg-white py-3">
-			<div class="container-fluid  px-4" >
-				<div class = "d-flex flex-wrap align-content-center justify-content-center gap-3">
-					<img src="/SVG/SauiLogo.svg" alt="Logo" width="30" height="24"  class="d-inline-block align-text-top"> 
-					<span id= "TextLogo" class = "fw-bold">SAIU EXPORT</span>
-					<button id="ButtonMenuToggle" class="ButtonMenuToggle" onclick="ToggleMenuAction()"></button>
-				</div>
-				
-				<button class="navbar-toggler" type="button"
-					data-bs-toggle="collapse" data-bs-target="#navbarNav"
-					aria-controls="navbarNav" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+			<div class="d-flex flex-column gap-1">
 
-				<div class="collapse navbar-collapse" id="navbarNav">
-					<ul >
-						<div th:replace="~{::MenuItems}"></div>
-					</ul>
+				<a class="MenuButton" th:href="@{/Dashboard/Productor}"> <img
+					src="/SVG/menu_productor.svg" alt="ClientesIcon"> <span
+					class="text-nowrap">Productor</span>
+				</a> <a class="MenuButton"> <img src="/SVG/menu_productos.svg"
+					alt="ProductosIcon"> <span>Semillas</span>
+				</a> <a class="MenuButton"> <img src="/SVG/menu_ventas.svg"
+					alt="VentasIcon"> <span>Compras</span>
+				</a> <a class="MenuButton"> <img src="/SVG/menu_reportes.svg"
+					alt="ReportesIcon"> <span>Reportes</span>
+				</a> <a class="MenuButton"> <img src="/SVG/menu_info.svg"
+					alt="AyudaIcon" class="menu-icon"> <span>Ayuda</span>
+				</a> <a class="MenuButton" th:href="@{/Usuario}"> <img
+					src="/SVG/menu_user.svg" alt="SesionIcon" class="menu-icon">
+					<span>Usuarios</span>
+				</a>
+
+			</div>
+		</div>
+
+		<!-- Información de usuario -->
+		<div
+			class="d-flex flex-column gap-2 shadow border border-2 rounded-3 bg-light pb-2 pt-2 py-3 px-2 mt-5 ">
+
+			<div
+				class="d-flex align-items-center justofy-content-center gap-2 mb-1 pe-4">
+				<img src="/SVG/user-masculino.svg" alt="User Avatar"
+					class="rounded-circle" width="35" height="35">
+				<div class="d-flex flex-column">
+					<span class=" fs-12 text-nowrap fw-bold"
+						th:text="${rol}"></span> <span
+						class=" fs-10 text-nowrap"
+						th:text="${username}"></span>
 				</div>
 
 			</div>
+
+			<a class="btn btn-success px-0" th:href="@{/Logout}"> <img alt=""
+				src="/SVG/icon-close-sesion.svg" width="25" height="25"> <span 
+				class="fs-10 fw-bold">Cerrar Sesion</span>
+			</a>
+
+
+
+		</div>
+	</div>
+
+	<!-- Fragmento de encabezado de menú -->
+	<div th:fragment="Menu-Header">
+		<nav id="NavBarHeader" class="navbar bg-white rounded-3 shadow mx-2">
+			<div class="container px-4">
+				<a class="Logo-header navbar-brand text-nowrap text-dark fw-bold"
+					href="#"> <img src="/SVG/SauiLogo.svg" alt="Logo" width="24"
+					height="24" class="d-inline-block align-text-top"> SAIU
+					EXPORT
+				</a>
+				<button id="ButtonHeader" type="button" class="btn btn-success"
+					data-bs-toggle="modal" data-bs-target="#overlayPanel">☰</button>
+
+				<!-- Modal -->
+				<div class="modal fade modal-sm" id="overlayPanel" tabindex="-1"
+					aria-labelledby="overlayPanelLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered container">
+						<div class="modal-content">
+							<div class="modal-header">
+								<span class="lead ms-4 fw-bold">Menú</span>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Cerrar"></button>
+							</div>
+							<div class="modal-body">
+								<div th:replace="~{::MenuItems}"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</nav>
 	</div>
-	
-	<div th:fragment="Menu-Sidebar" >
-			<ul>
-				<div th:replace="~{::MenuItems}" ></div>
-			</ul>
+
+	<!-- Fragmento de barra lateral del menú -->
+	<div th:fragment="Menu-Sidebar" class="h-100">
+		<div th:replace="~{::MenuItems}"></div>
 	</div>
 
 </body>

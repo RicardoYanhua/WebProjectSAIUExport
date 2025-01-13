@@ -10,48 +10,30 @@
 
 
 
-	<div th:fragment="ShowMessageAcesoDenegado" class="container-error">
-		<h1>Acceso Denegado</h1>
-		<p>No tienes los permisos necesarios para acceder a esta página.</p>
+	<div th:fragment="ShowMessageAcesoDenegado"
+		class="container-error shadow">
+		<img
+			src="https://i.pinimg.com/originals/86/41/80/86418032b715698a4dfa6684b50c12af.gif"
+			alt="Acceso Denegado" class="error-image">
+
+
 		<style>
 .container-error {
-	text-align: center;
-	width:auto;
-	padding: 30px;
-	border: 2px solid #f5c6cb;
-	background-color: #ffffff;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	max-width: 600px;
+	background-color: #fff;
+	border-radius: 30px;
+	overflow: hidden;
 }
 
-.container-error h1 {
-	font-size: 2rem;
-	margin: 0;
-	color: #dc3545;
-}
-
-.container-error p {
-	font-size: 1.2rem;
-	margin-top: 10px;
-	color: #555;
-}
-
-.container-error a {
-	display: inline-block;
-	margin-top: 20px;
-	padding: 10px 20px;
-	font-size: 1rem;
-	color: #ffffff;
-	background-color: #dc3545;
-	text-decoration: none;
-	border-radius: 5px;
-}
-
-.container-error a:hover {
-	background-color: #c82333;
+/* Imagen del error */
+.error-image {
+	max-width: 100%;
+	max-height: auto;
 }
 </style>
 	</div>
+
+
 
 </body>
 </html>

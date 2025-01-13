@@ -8,32 +8,24 @@
 
 
 	<!-- Modal de confirmación genérico -->
-	<div th:fragment="Modal-ConfirmMessage" class="modal fade "
-		id="MessageConfirmModal" tabindex="-1" aria-labelledby="modalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog ">
-			<div class="modal-content">
+	<div th:fragment="Modal-ConfirmMessage" class="modal fade" id="MessageConfirmModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-4">
 
-				<form id="deleteForm" method="post">
-					<div class="modal-header bg-danger mb-1">
-						<h5 class="modal-title fs-5 fw-bold text-white fs-6 py-0"
-							id="modalLabel"></h5>
-
-					</div>
-					<div class="modal-body fs-6 lead" id="modalBody"></div>
-
-					<div class="modal-footer border-0 gap-1">
-						<button type="button"
-							class="btn btn-outline-secondary rounded-pill px-4"
-							data-bs-dismiss="modal">Cancelar</button>
-						<button type="submit"
-							class="btn btn-outline-success rounded-pill px-4"
-							id="confirmDeleteButton">Confirmar</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+            <form id="deleteForm" method="post">
+                <div class="modal-header bg-danger text-white ">
+                    <h5 class="modal-title fs-16 fw-bold" id="modalLabel"></h5>
+                </div>
+                <div class="modal-body fs-14 lead" id="modalBody">
+                </div>
+                <div class="modal-footer border-0 gap-2">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4 py-2 fs-12" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger rounded-pill px-4 py-2 fs-12" id="confirmDeleteButton">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 	<!-- Toast -->

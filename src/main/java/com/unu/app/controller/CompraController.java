@@ -12,40 +12,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.unu.app.entity.Cliente;
+import com.unu.app.entity.Productor;
 import com.unu.app.entity.Compra;
 import com.unu.app.entity.DetalleCompra;
-import com.unu.app.entity.Producto;
-import com.unu.app.service.ClienteService;
+import com.unu.app.entity.Semilla;
+import com.unu.app.service.SemillaService;
 import com.unu.app.service.CompraService;
 import com.unu.app.service.DetalleCompraService;
-import com.unu.app.service.ProductoService;
+import com.unu.app.service.ProductorService;
 
 @Controller
 @RequestMapping("/Compras")
 public class CompraController {
 	
 	@Autowired
-	@Qualifier("clienteService")
-	private ClienteService clienteService;
+	@Qualifier("productorService")
+	private ProductorService productorService;
 	
 	@Autowired
 	@Qualifier("compraService")
 	private CompraService compraService;
 	
 	@Autowired
-	@Qualifier("productoService")
-	private ProductoService productoService;
+	@Qualifier("semillaService")
+	private SemillaService semillaService;
 	
 	@Autowired
 	@Qualifier("detalleCompraService")
 	private DetalleCompraService detalleCompraService;
 	
-	public List<Cliente> getListClientes(){
-			return clienteService.getListClientesNameAndId();
+	public List<Productor> getListClientes(){
+			return productorService.getListProductorNameAndId();
 	}
-	public List<Producto> getListProductos(){
-		return productoService.getProductos();
+	public List<Semilla> getListProductos(){
+		return semillaService.getSemillas();
 	}
 	public List<DetalleCompra> getListaDetalleCompra(Compra compra){
 		return detalleCompraService.ListaDetalleCompraByIdCompra(compra);
@@ -81,9 +81,9 @@ public class CompraController {
 		List<DetalleCompra> ListaDetalle = detalleCompraService.ListaDetalleCompraByIdCompra(c);
 		
 		for(DetalleCompra dc : ListaDetalle) {
-			Producto p = productoService.ObtenerProducto(dc.getId_producto().getId());
+			Semilla p = semillaService.ObtenerSemilla(dc.getId_producto().getId());
 			p.setCantidad(p.getCantidad() + dc.getCantidad());
-			productoService.ActualizarProducto(p);
+			semillaService.ActualizarSemilla(p);
 			detalleCompraService.EliminarDetalleProducto(dc.getId());
 		}
 		compraService.EliminarCompra(Integer.valueOf(id));
@@ -104,9 +104,9 @@ public class CompraController {
 		        ObtenerCompra = compraService.ObtenerCompra(idCompraParsed);
 		} 
 		DetalleCompra dc = detalleCompraService.ObtenerDetalleProducto(id);
-		Producto p = productoService.ObtenerProducto(dc.getId_producto().getId());
+		Semilla p = semillaService.ObtenerSemilla(dc.getId_producto().getId());
 		p.setCantidad(p.getCantidad() + dc.getCantidad());
-		productoService.ActualizarProducto(p);
+		semillaService.ActualizarSemilla(p);
 		
 		detalleCompraService.EliminarDetalleProducto(id);
 		return "redirect:/Compras/RealizarCompra?ClienteSeleccionado=" + cliente
@@ -152,8 +152,8 @@ public class CompraController {
 		            + "&ErrorProducto=La cantidad es negativo no valido.";
 		}
 		
-		Cliente obtenerCliente = clienteService.ObtenerCliente(Integer.parseInt(CodigoCliente));
-		Producto ObtenerProducto = productoService.ObtenerProducto(Integer.parseInt(CodigoProducto));
+		Productor obtenerCliente = productorService.ObtenerProductor(Integer.parseInt(CodigoCliente));
+		Semilla ObtenerProducto = semillaService.ObtenerSemilla(Integer.parseInt(CodigoProducto));
 		
 		if(cantidadInsertada > ObtenerProducto.getCantidad()) {
 			 return "redirect:/Compras/RealizarCompra?ClienteSeleccionado=" + cliente 
@@ -161,7 +161,7 @@ public class CompraController {
 			            + "&ErrorProducto=No hay sufientes productos.";
 		}else {
 			ObtenerProducto.setCantidad(ObtenerProducto.getCantidad() - cantidadInsertada);
-			productoService.ActualizarProducto(ObtenerProducto);
+			semillaService.ActualizarSemilla(ObtenerProducto);
 		}
 		
 		Compra ObtenerCompra = null;
@@ -198,8 +198,8 @@ public class CompraController {
 			 @RequestParam(name = "ImporteTotal", required = false, defaultValue = "") String importeTotal
 			){
 		ModelAndView modelAndView = new ModelAndView("/Compras/RealizarCompra");
-		modelAndView.addObject("ListaClientes" , (List<Cliente>) getListClientes());
-		modelAndView.addObject("ListaProductos" , (List<Producto>) getListProductos());
+		modelAndView.addObject("ListaClientes" , (List<Productor>) getListClientes());
+		modelAndView.addObject("ListaProductos" , (List<Semilla>) getListProductos());
 		modelAndView.addObject("ClienteSeleccionado", cliente);
 		modelAndView.addObject("CodigoCompra", id_compra);
 		modelAndView.addObject("ErrorCliente", errorCliente);
