@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<!-- Modal de confirmación genérico -->
+	<div th:fragment="Modal-ConfirmMessage" class="modal fade" id="MessageConfirmModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-4">
+
+            <form id="deleteForm" method="post">
+                <div class="modal-header bg-danger text-white ">
+                    <h5 class="modal-title fs-16 fw-bold" id="modalLabel"></h5>
+                </div>
+                <div class="modal-body fs-14 lead" id="modalBody">
+                </div>
+                <div class="modal-footer border-0 gap-2">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4 py-2 fs-12" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger rounded-pill px-4 py-2 fs-12" id="confirmDeleteButton">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+	<!-- Toast -->
+	<div th:fragment="Toast-MessageDanger"
+		class="toast-container position-fixed w-100 top-0 start-0 p-4 mt-3 d-flex align-items-center justify-content-center">
+		<div id="validationToast" class="toast text-bg-danger border-0"
+			role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="d-flex">
+				<div class="toast-body fw-bold" id="toastMessage">
+					<!-- Mensaje dinámico se mostrará aquí -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

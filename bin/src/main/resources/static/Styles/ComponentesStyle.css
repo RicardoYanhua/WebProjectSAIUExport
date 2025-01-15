@@ -1,0 +1,258 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+:root {
+	--InputBorderDefaultColor: 2px solid rgb(220, 220, 220);
+	--InputBorderFocusColor: 2px solid rgb(58, 192, 89);
+	--InputBorderRadius: 8px;
+	--InputContainerPadding: 0px 10px;
+	--BackgroundBlur: 50px;
+	--BackgroundSaturate: 180%;
+	--InputBackgroundColor: rgb(255, 255, 255);
+	--IconSize: 25px;
+	--FontSize: 14px;
+}
+
+body {
+	font-family: 'Inter', sans-serif;
+	height: 100vh;
+	margin:0;
+}
+
+.bg-blur-white {
+	border: 1px solid rgb(220, 220, 220);
+	backdrop-filter: blur(16px) saturate(180%);
+	-webkit-backdrop-filter: blur(16px) saturate(180%);
+	background-color: rgba(255, 255, 255, 0.85);
+}
+
+.btn-icon {
+	width: 30px;
+	height: 30px;
+	outline: none;
+	margin: 0;
+	border: none;
+	border-radius: 8px;
+	padding: 8px;
+	box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+	background-color: rgb(250, 250, 255);
+	background-size: 18px 18px;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: all 200ms ease-in;
+}
+
+.btn-icon:hover {
+	transform: translateY(-2px);
+	filter: invert(1);
+	box-shadow: 0 8px 12px rgba(255, 255, 255, 0.25);
+}
+
+.icon-delete {
+	background-image: url('/SVG/op_delete.svg');
+}
+
+.icon-edit {
+	background-image: url('/SVG/op_edit.svg');
+}
+
+.icon-view {
+	background-image: url('/SVG/op_view.svg');
+}
+
+.icon-add {
+	background-image: url('/SVG/icon-add.svg');
+}
+
+
+
+.btn-icon-toggle-menu {
+	width: 35px;
+	height: 35px;
+	outline: none;
+	margin: 0;
+	border: none;
+	border-radius: 50%;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	background-color: rgb(250, 250, 255);
+	background-size: 20px 20px;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: all 100ms ease-in;
+}
+
+.icon-toggle-menu {
+	background-image: url('/SVG/menu_toggle.svg');
+	background-size: 15px 15px;
+}
+
+::-webkit-scrollbar {
+	width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: linear-gradient(45deg, rgb(34, 159, 34), rgb(34, 159, 34));
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 4px;
+	margin: 10px 0px; 
+}
+
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+	background: url('/SVG/icon-clear-text.svg') no-repeat center center;
+	background-size: contain;
+	width: 20px;
+	height: 20px;
+}
+
+.Container-Input {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: var(--InputContainerPadding);
+	border-radius: var(--InputBorderRadius);
+	background-color: var(--InputBackgroundColor);
+	border: var(--InputBorderDefaultColor);
+	gap: 6px;
+}
+
+.Container-Input:focus-within {
+	border: var(--InputBorderFocusColor);
+}
+
+.Container-Input input {
+	border: none;
+	outline: none;
+	background: none;
+	width: 100%;
+	height: 100%;
+	font-size: var(--FontSize);
+	padding: 10px 0px;
+}
+
+.Container-Input img {
+	width: var(--IconSize);
+	height: var(--IconSize);
+	object-fit: contain;
+}
+
+.Container-Input button {
+	outline: none;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+	background: none;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: filter 0.5s ease;
+}
+
+.Container-Input .ButtonTooglePasswordView {
+	width: var(--IconSize);
+	height: var(--IconSize);
+	background-image: url('/SVG/icon-password-hidden.svg');
+}
+
+.ButtonTooglePasswordView.showPassword {
+	background-image: url('/SVG/icon-password-show.svg');
+}
+
+.shadow-default {
+	background-color: rgb(255, 255, 255);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.fs-10 {
+	font-size: 10px;
+}
+.fs-12 {
+	font-size: 12px;
+}
+
+.fs-14 {
+	font-size: 14px;
+}
+
+.fs-16 {
+	font-size: 16px;
+}
+
+
+.bg-green-1 { background-color: #004d00; } 
+.bg-green-2 { background-color: #006600; }
+.bg-green-3 { background-color: #008000; }
+.bg-green-4 { background-color: #009900; }
+.bg-green-5 { background-color: #00b300; }
+.bg-green-6 { background-color: #00cc00; }
+.bg-green-7 { background-color: #00e600; }
+.bg-green-8 { background-color: #1aff1a; }
+.bg-green-9 { background-color: #4dff4d; }
+.bg-green-10 { background-color: #80ff80; } 
+
+.bg-white-1{
+	background-color: rgb(245,245,255);
+}
+
+.btn-icon-text {
+  display: flex; 
+  align-items: center; 
+  cursor: pointer;
+  overflow:hidden;
+  gap:5px;
+}
+
+.btn-icon-text img {
+  width: 25px;
+  height: 25px;
+}
+
+.Filter-icon{
+	padding: 7px 10px 7px 35px ;
+	
+}
+
+.Filter-icon::before {
+	content: "";
+	position: absolute;
+	display:flex;
+	align-items:center;
+	left: 7px;
+	top:25%;
+	background-image: url('/SVG/icon-filter.svg');
+	width: 25px;
+	height: 100%;
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+}
+
+.dropdown-menu button:hover {
+	background-color: rgb(34, 159, 34);
+}
+
+
+select option {
+    background-color: white;
+    font-size:12px;
+    color: black;
+}
+
+
+

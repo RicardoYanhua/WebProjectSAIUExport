@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" pageEncoding="UTF-8">
+<title>Insert title here</title>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous">
+	
+</script>
+
+<link href="/Styles/MenuStyle.css" rel="stylesheet">
+<link href="/Styles/WindowStyle.css" rel="stylesheet">
+<script src="/Scripts/MenuScript.js"></script>
+
+</head>
+
+<body>
+
+	<div th:insert="Components/Menu :: Menu-Header"
+		class="Header-container"></div>
+
+	<div class="Main-container">
+
+		<div th:insert="Components/Menu :: Menu-Sidebar" id="Menu-container"
+			class="Menu-container"></div>
+
+		<div class="Body-container overflow-y-auto">
+		
+			
+			<div class="d-flex flex-column align-items-center">
+    <h1 class="text-center lead fs-3 mb-4">SAIU EXPORT</h1>
+
+    <div class="container d-flex flex-column gap-3">
+        <!-- Elemento genérico con clases comunes -->
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>RUC</strong>
+            <span>20393541521</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Razón Social</strong>
+            <span>SAIU EXPORT S.A.C</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Tipo de Empresa</strong>
+            <span>Sociedad Anónima Cerrada S.A.C</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Condición</strong>
+            <span>Activo</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Fecha de Inicio de Actividades</strong>
+            <span>12 de Octubre del 2009</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Actividades Comerciales</strong>
+            <span>Servicios Agrícolas, Ganaderas, Venta Mayorista de materias primas Agropecuarias</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>CIIU</strong>
+            <span>01400</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Tipo de Facturación</strong>
+            <span>Manual</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Tipo de Contabilidad</strong>
+            <span>Computarizado</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Actividades de Comercio Exterior</strong>
+            <span>Importador y Exportador</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>País</strong>
+            <span>Perú</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Región</strong>
+            <span>Ucayali</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Provincia</strong>
+            <span>Coronel Portillo</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Dirección Legal</strong>
+            <span>PJ. Villa María Mza. D Lote. 13, Yarinacocha</span>
+        </div>
+        <div class="info-item d-flex justify-content-between gap-3 px-3 py-2">
+            <strong>Estado Domicilio</strong>
+            <span>Habido</span>
+        </div>
+    </div>
+</div>
+
+		
+		
+			
+		</div>
+	</div>
+
+<!-- Funciones JavaScript -->
+    <script>
+       
+        setActiveByIndex(4);
+    </script>
+</body>
+</html>

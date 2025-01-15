@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" pageEncoding="UTF-8">
+<title>Registrar Productor</title>
+
+<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous">
+		
+	</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="/Styles/MenuStyle.css" rel="stylesheet">
+<link href="/Styles/ComponentesStyle.css" rel="stylesheet">
+
+<script src="/Scripts/MenuScript.js"></script>
+<script src="/Scripts/ModalAndToastScript.js"></script>
+<script src="/Scripts/InsertarProductorScript.js"></script>
+<script src="/Scripts/ValidarFormularioProductor.js"></script>
+
+</head>
+<body>
+
+
+	<div class="Container">
+		<div th:insert="Components/Menu :: Menu-Sidebar" id="Menu-container"
+			class="Menu-container"></div>
+		<div class="Main-container">
+			<div th:insert="Components/Menu :: Menu-Header"
+				class="Header-container "></div>
+			<div class="Body-container">
+
+
+
+
+
+		<div class="container-fluid mt-2 mb-3">
+        <form th:action="@{/Dashboard/Productor/InsertarProductor}" th:object="${Productor}" method="post" id="FormCliente" onsubmit="return ValidarFormularioProductor()">
+            <h3 class="mb-4 lead text-white text-left fs-6 bg-success shadow py-3 ps-4 rounded-3 fw-bold"> + + +  Registrar nuevo Productor  + + +</h3>
+
+            <!-- Panel de Datos del Cliente -->
+            <div class="mb-2 shadow-lg rounded-3 bg-white">
+                <div class="bg-success text-white py-2 px-3 rounded-top">
+                    <h5 class="mb-2 mt-2 fs-16">Datos del Cliente</h5>
+                </div>
+                <div class="px-4 py-3">
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <label for="InputDniCliente" class="form-label fw-bold mb-0 ps-1">DNI</label>
+                        	<div class="Container-Input">
+		                        <img src="/SVG/icon-default.svg"> 
+		                        <input id = "InputDniCliente" type="text"  placeholder="Insertar DNI" th:field="*{dni}" autocomplete="off">
+		                    </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="InputNombreCliente" class="form-label fw-bold mb-0 ps-1">Nombres</label>
+                            <div class="Container-Input mb-1">
+		                        <img src="/SVG/icon-default.svg"> 
+		                        <input id = "InputNombreCliente" type="text"  placeholder="Insertar nombres" th:field="*{nombre}" autocomplete="off">
+		                    </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="InputApellidoCliente" class="form-label fw-bold mb-0 ps-1">Apellidos</label>
+                        	<div class="Container-Input">
+		                        <img src="/SVG/icon-default.svg"> 
+		                        <input id = "InputApellidoCliente" type="text"  placeholder="Insertar apellidos" th:field="*{apellido}" autocomplete="off">
+		                    </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="InputCorreoCliente" class="form-label fw-bold mb-0 ps-1">Correo</label>
+                            <div class="Container-Input">
+		                        <img src="/SVG/icon-default.svg"> 
+		                        <input id = "InputCorreoCliente" type="text"  placeholder="Insertar correo" th:field="*{correo}" autocomplete="off">
+		                    </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="InputTelefonoCliente" class="form-label fw-bold mb-0 ps-1">Teléfono</label>
+                        	<div class="Container-Input">
+		                        <img src="/SVG/icon-default.svg"> 
+		                        <input id = "InputTelefonoCliente" type="text"  placeholder="Insertar teléfono" th:field="*{telefono}" autocomplete="off">
+		                    </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel de Ubicación del Cliente -->
+            <div class="mb-2 shadow-lg rounded-3 bg-white">
+                <div class="bg-success text-white py-2 px-3 rounded-top">
+                    <h5 class="mb-2 mt-2 fs-16">Datos de Ubicacion</h5>
+                </div>
+                <div class="px-4 py-3">
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <label for="departamentosSelect" class="form-label fw-bold">Departamentos</label>
+                            <select id="departamentosSelect" class="form-select" th:field="*{id_departamento}">
+                                <option disabled selected value="">Seleccione una opción...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="provinciasSelect" class="form-label fw-bold">Provincia</label>
+                            <select id="provinciasSelect" class="form-select" th:field="*{id_provincia}">
+                                <option disabled selected value="">Seleccione una opción...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="distritosSelect" class="form-label fw-bold">Distrito</label>
+                            <select id="distritosSelect" class="form-select" th:field="*{id_distrito}">
+                                <option disabled selected value="">Seleccione una opción...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="InputDireccionCliente" class="form-label fw-bold">Dirección del Cliente</label>
+                        	<div class="Container-Input">
+		                        <img src="/SVG/icon-default.svg"> 
+		                        <input id = "InputDireccionCliente" type="text"  placeholder="Insertar dirección" th:field="*{direccion}" autocomplete="off">
+		                    </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="d-flex justify-content-end gap-3 mt-auto shadow bg-light rounded-3 p-3">
+                <a class="btn btn-outline-secondary py-2 px-4 rounded-pill" type="button" th:href="@{/Dashboard/Productor/ListaProductor}">Volver</a>
+                <button type="submit" class="btn btn-success py-2 px-5 rounded-pill">Guardar</button>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+	<!-- Mensaje de Error con Toast -->
+	<div th:insert="Components/ModalAndToast :: Toast-MessageDanger"></div>
+
+	<script>
+		setActiveByIndex(0);
+	</script>
+	
+</body>
+</html>
+
