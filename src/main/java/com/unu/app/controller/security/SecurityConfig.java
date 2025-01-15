@@ -51,14 +51,16 @@ public class SecurityConfig {
                         .filter(authority -> authority.startsWith("ROLE_"))
                         .map(authority -> authority.substring(5))
                         .findFirst()
-                        .orElse("Cliente");
-
+                        .orElse(null);
                 switch (role) {
                     case "Administrador":
                         response.sendRedirect("/Dashboard");
                         break;
                     case "Cliente":
                         response.sendRedirect("/Inicio");
+                        break;
+                    case "Empleado":
+                        response.sendRedirect("/Dashboard");
                         break;
                 }
             }
@@ -80,7 +82,7 @@ public class SecurityConfig {
                         .requestMatchers("/Contacto").permitAll()
                         .requestMatchers("/Styles/**", "/Scripts/**", "/Images/**", "/SVG/**").permitAll()
                         // Rutas protegidas por roles
-                        .requestMatchers("/Dashboard/**").hasRole("Administrador")
+                        .requestMatchers("/Dashboard/**").hasAnyRole("Administrador", "Empleado")
                         // Resto de rutas requieren autenticación
                         .anyRequest().authenticated()
                 )
@@ -90,7 +92,7 @@ public class SecurityConfig {
                         .failureUrl("/Login?Error=true")
                 )
                 .exceptionHandling()
-                    .accessDeniedHandler(customAccessDeniedHandler) // Correcto, usa el handler para acceso denegado
+                    .accessDeniedHandler(customAccessDeniedHandler)
                 .and()
                 .logout(config -> config
                         .logoutUrl("/Logout")
@@ -106,6 +108,6 @@ public class SecurityConfig {
 class CustomAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        response.sendRedirect("/Inicio"); // Redirige al login si el acceso es denegado
+        response.sendRedirect("/Inicio");
     }
 }

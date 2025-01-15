@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.unu.app.controller.security.LoginStatusListener;
+import com.unu.app.controller.security.PermisosService;
 import com.unu.app.entity.Usuario;
 import com.unu.app.service.UsuarioService;
 
@@ -22,34 +23,12 @@ import org.springframework.ui.Model;
 public class WebClientController {
 
 	@Autowired
-	private UsuarioService usuarioService;
-	
-	@ModelAttribute
-	public void ConfigurarPermisos(Model model) {
-		model.addAttribute("isUserLogin", LoginStatusListener.isUserLogin);
-		System.out.println("Estado de login: " + LoginStatusListener.isUserLogin);
+    private PermisosService permisosService;
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth != null && auth.isAuthenticated()) {
-			Object principal = auth.getPrincipal();
-			if (principal instanceof UserDetails) {
-				UserDetails userDetails = (UserDetails) principal;
-				
-				String roles = userDetails.getAuthorities()
-						.stream()
-						.map(GrantedAuthority::getAuthority)
-						.collect(Collectors.joining(", "));
-				
-				model.addAttribute("rol", roles.replace("ROLE_", "").toUpperCase());
-				
-				Usuario user = usuarioService.getUserByUsername(userDetails.getUsername());
-				
-				String NombresYApellidos = user.getNombresApelldios();
-				
-				model.addAttribute("username", NombresYApellidos);
-			}
-		}
-	}
+    @ModelAttribute
+    public void configurarPermisos(Model model) {
+        permisosService.configurarPermisos(model);
+    }
 
 	@GetMapping("/Inicio")
 	public String Inicio() {

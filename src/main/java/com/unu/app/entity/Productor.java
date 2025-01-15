@@ -93,7 +93,11 @@ public class Productor {
 	}
 	
 	public String getUbicacion() {
-		return "" + NombreDepartamento + " " + NombreProvincia + " " + NombreDistrito;
+		return "" + this.NombreDepartamento + " " + this.NombreProvincia + " " + this.NombreDistrito;
+	}
+	
+	public String getNombresYApellidos() {
+		return "" + this.nombre + " " + this.apellido;
 	}
 	
 	public int getId() {

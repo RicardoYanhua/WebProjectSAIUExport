@@ -25,17 +25,13 @@
 				<a class="MenuButton" th:href="@{/Dashboard/Productor}"> <img
 					src="/SVG/menu_productor.svg" alt="ClientesIcon"> <span
 					class="text-nowrap">Productor</span>
-				</a> <a class="MenuButton"> <img src="/SVG/menu_productos.svg"
-					alt="ProductosIcon"> <span>Semillas</span>
-				</a> <a class="MenuButton"> <img src="/SVG/menu_ventas.svg"
-					alt="VentasIcon"> <span>Compras</span>
-				</a> <a class="MenuButton"> <img src="/SVG/menu_reportes.svg"
-					alt="ReportesIcon"> <span>Reportes</span>
-				</a> <a class="MenuButton"> <img src="/SVG/menu_info.svg"
-					alt="AyudaIcon" class="menu-icon"> <span>Ayuda</span>
-				</a> <a class="MenuButton" th:href="@{/Usuario}"> <img
-					src="/SVG/menu_user.svg" alt="SesionIcon" class="menu-icon">
-					<span>Usuarios</span>
+				</a> <a class="MenuButton" th:href="@{/Dashboard/Semilla}"> <img
+					src="/SVG/menu_productos.svg" alt="ProductosIcon"> <span>Semillas</span>
+				</a> <a class="MenuButton" th:href="@{/Dashboard/Compra}"> <img
+					src="/SVG/menu_ventas.svg" alt="VentasIcon"> <span>Compras</span>
+				</a> <a th:if="${isUserAdmin}" class="MenuButton"
+					th:href="@{/Dashboard/Usuario}"> <img src="/SVG/menu_user.svg"
+					alt="SesionIcon" class="menu-icon"> <span>Usuarios</span>
 				</a>
 
 			</div>
@@ -50,16 +46,14 @@
 				<img src="/SVG/user-masculino.svg" alt="User Avatar"
 					class="rounded-circle" width="35" height="35">
 				<div class="d-flex flex-column">
-					<span class=" fs-12 text-nowrap fw-bold"
-						th:text="${rol}"></span> <span
-						class=" fs-10 text-nowrap"
-						th:text="${username}"></span>
+					<span class="fs-12 text-nowrap fw-bold" th:text="${rol}"></span> <span
+						class="fs-12 text-nowrap" th:text="${username}"></span>
 				</div>
 
 			</div>
 
 			<a class="btn btn-success px-0" th:href="@{/Logout}"> <img alt=""
-				src="/SVG/icon-close-sesion.svg" width="25" height="25"> <span 
+				src="/SVG/icon-close-sesion.svg" width="25" height="25"> <span
 				class="fs-10 fw-bold">Cerrar Sesion</span>
 			</a>
 
@@ -70,7 +64,7 @@
 
 	<!-- Fragmento de encabezado de menú -->
 	<div th:fragment="Menu-Header">
-		<nav id="NavBarHeader" class="navbar bg-white rounded-3 shadow mx-2">
+		<nav id="NavBarHeader" class="navbar bg-white shadow fixed-top">
 			<div class="container px-4">
 				<a class="Logo-header navbar-brand text-nowrap text-dark fw-bold"
 					href="#"> <img src="/SVG/SauiLogo.svg" alt="Logo" width="24"
@@ -101,7 +95,8 @@
 	</div>
 
 	<!-- Fragmento de barra lateral del menú -->
-	<div th:fragment="Menu-Sidebar" class="h-100">
+	<div th:unless="${isActivedCompra}" th:fragment="Menu-Sidebar"
+		class="h-100">
 		<div th:replace="~{::MenuItems}"></div>
 	</div>
 

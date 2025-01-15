@@ -111,7 +111,7 @@ public class ProductorServiceImpl implements ProductorService {
 	}
 
 	@Override
-	public List<Productor> getListProductorNameAndId() {
+	public List<Productor> ObtenerListaProductor_Id_Nombre() {
 		return productorRepository.getListClientesNameAndId();
 	}
 

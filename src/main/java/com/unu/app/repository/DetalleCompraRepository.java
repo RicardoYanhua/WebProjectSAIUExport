@@ -16,5 +16,11 @@ public interface DetalleCompraRepository extends JpaRepository<DetalleCompra, Se
 	@Query("SELECT d FROM DetalleCompra d WHERE d.id_compra = :idCompra")
     List<DetalleCompra> ListaDetalleByIdCompra(@Param("idCompra") Compra compra);
 	
+	@Query("SELECT d FROM DetalleCompra d WHERE d.id_compra = :idCompra")
+    List<DetalleCompra> ListaDetalleByIdCompra(@Param("idCompra") Long compra);
+	
+	@Query("SELECT SUM(d.subtotal) FROM DetalleCompra d WHERE d.id_compra.id = :idCompra")
+    Double obtenerTotalPorCompra(@Param("idCompra") int idCompra);
+	
 	
 }

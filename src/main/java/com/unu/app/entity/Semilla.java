@@ -5,9 +5,12 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +21,10 @@ public class Semilla {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name= "id")
 	private int id;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_productor")
+	private Productor id_productor;
 	
 	@Column(name = "nombre")
 	private String nombre;
@@ -35,13 +42,14 @@ public class Semilla {
 	private LocalDateTime fecha_registro;
 
 	public Semilla() {
-		this(0,"","",0.0,0,LocalDateTime.now());
+		this(0,new Productor(),"","",0.0,0,LocalDateTime.now());
 	}
 	
-	public Semilla(int id, String nombre, String descripcion, double precio, int cantidad,
+	public Semilla(int id, Productor productor, String nombre, String descripcion, double precio, int cantidad,
 			LocalDateTime fecha_registro) {
 		super();
 		this.id = id;
+		this.id_productor = productor;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
@@ -60,6 +68,15 @@ public class Semilla {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	
+	public Productor getId_productor() {
+		return id_productor;
+	}
+
+	public void setId_productor(Productor id_productor) {
+		this.id_productor = id_productor;
 	}
 
 	public String getNombre() {

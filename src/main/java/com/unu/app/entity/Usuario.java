@@ -77,7 +77,7 @@ public class Usuario implements UserDetails {
         this.fecha_registro = fecha_registro;
     }
 
-    public String getNombresApelldios() {
+    public String getNombresApellidos() {
     	return this.nombre + " " + this.apellido;
     }
 
