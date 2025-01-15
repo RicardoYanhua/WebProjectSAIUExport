@@ -7,4 +7,5 @@ import com.unu.app.entity.Semilla;
 
 @Repository("semillaRepository")
 public interface SemillaRepository extends JpaRepository<Semilla, Serializable> {
+	
 }

@@ -25,8 +25,8 @@ public class DetalleCompra {
 	private Compra id_compra;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto")
-	private Semilla id_producto;
+    @JoinColumn(name = "id_semilla")
+	private Semilla id_semilla;
 	
 	@Column(name = "cantidad")
 	private int cantidad;
@@ -41,12 +41,12 @@ public class DetalleCompra {
 		this(0,new Compra(),new Semilla(),0,0.0,LocalDateTime.now());
 	}
 	
-	public DetalleCompra(int id, Compra id_compra, Semilla id_producto, int cantidad,
+	public DetalleCompra(int id, Compra id_compra, Semilla id_semilla, int cantidad,
 			double subtotal, LocalDateTime fecha_compra) {
 		super();
 		this.id = id;
 		this.id_compra = id_compra;
-		this.id_producto = id_producto;
+		this.id_semilla = id_semilla;
 		this.cantidad = cantidad;
 		this.subtotal = subtotal;
 		this.fecha_compra = fecha_compra;
@@ -68,12 +68,12 @@ public class DetalleCompra {
 		this.id_compra = id_compra;
 	}
 
-	public Semilla getId_producto() {
-		return id_producto;
+	public Semilla getId_semilla() {
+		return id_semilla;
 	}
 
-	public void setId_producto(Semilla id_producto) {
-		this.id_producto = id_producto;
+	public void setId_semilla(Semilla id_semilla) {
+		this.id_semilla = id_semilla;
 	}
 
 	public int getCantidad() {
@@ -83,7 +83,6 @@ public class DetalleCompra {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-
 
 	public double getSubtotal() {
 		return subtotal;
@@ -101,7 +100,5 @@ public class DetalleCompra {
 		this.fecha_compra = fecha_compra;
 	}
 
-	
-	
 	
 }

@@ -11,7 +11,7 @@
 }
 
 .Table-custom thead {
-	background-color: rgb(27, 153, 94);
+	background-color: rgb(54,54,54);
 
 	
 	
@@ -21,7 +21,7 @@
 	text-align: left;
 	padding: 10px 10px;
 	font-weight: bold;
-	color: rgb(220, 220, 220);
+	color: rgb(255,255,255);
 }
 
 .Table-custom td {
@@ -154,10 +154,7 @@
 		margin-right: 10px;
 		color: #555;
 	}
-	.t{
-		display: block;
-		height: auto;
-	}
+	
 }
 
 @media ( min-width : 744px) and (max-width: 1080px) {

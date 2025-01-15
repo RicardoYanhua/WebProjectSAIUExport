@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
+<!-- Metaetiqueta para definir el conjunto de caracteres y la codificación de la página -->
 <meta charset="UTF-8" pageEncoding="UTF-8">
 <title>Ver Productor</title>
 
-<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous">
-		
-	</script>
+<!-- Inclusión de jQuery desde un CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="/Styles/MenuStyle.css" rel="stylesheet">
-<script src="/Scripts/MenuScript.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+
+<!-- Hojas de estilo locales -->
 <link href="/Styles/ComponentesStyle.css" rel="stylesheet">
+<link href="/Styles/MenuStyle.css" rel="stylesheet">
+
+<link href="/Styles/TableStyle.css" rel="stylesheet">
+
+<!-- Scripts locales -->
+<script src="/Scripts/MenuScript.js"></script>
 <script src="/Scripts/ModalAndToastScript.js"></script>
 
 
@@ -21,168 +32,157 @@
 <body>
 
 	<div class="Container">
-		<div th:insert="Components/Menu :: Menu-Sidebar" id="Menu-container"
-			class="Menu-container"></div>
-		<div class="Main-container">
-			<div th:insert="Components/Menu :: Menu-Header"
-				class="Header-container "></div>
-			<div class="Body-container">
-
-
-				<div class="container-fluid mb-3 mt-2">
-
-					<!-- Sección de datos del cliente -->
-					<div class="shadow bg-white rounded-3 pb-3">
-						<h5
-							class="py-3 mb-3 bg-dark text-white ps-4 text-left fw-bold rounded-top">
-							Datos del Cliente</h5>
-						<!-- Contenedor principal con cinco columnas responsivas -->
-						<div class="container px-4 fs-14">
-							<div
-								class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
-								<!-- Campo DNI -->
-								<div class="col">
-									<strong class="d-block">DNI:</strong> <span
-										th:text="${DatosProductor.dni}"></span>
-								</div>
-
-								<!-- Nombres -->
-								<div class="col">
-									<strong class="d-block">Nombres:</strong> <span
-										th:text="${DatosProductor.nombre}"></span>
-								</div>
-
-								<!-- Apellidos -->
-								<div class="col">
-									<strong class="d-block">Apellidos:</strong> <span
-										th:text="${DatosProductor.apellido}"></span>
-								</div>
-
-								<!-- Correo -->
-								<div class="col">
-									<strong class="d-block">Correo:</strong> <span
-										th:text="${DatosProductor.correo}"></span>
-								</div>
-
-								<!-- Teléfono -->
-								<div class="col">
-									<strong class="d-block">Teléfono:</strong> <span
-										th:text="${DatosProductor.telefono}"></span>
-								</div>
-
-								<!-- ID Departamento -->
-								<div class="col">
-									<strong class="d-block">ID Departamento:</strong> <span
-										th:text="${DatosProductor.id_departamento}"></span>
-								</div>
-
-								<!-- ID Provincia -->
-								<div class="col">
-									<strong class="d-block">ID Provincia:</strong> <span
-										th:text="${DatosProductor.id_provincia}"></span>
-								</div>
-
-								<!-- ID Distrito -->
-								<div class="col">
-									<strong class="d-block">ID Distrito:</strong> <span
-										th:text="${DatosProductor.id_distrito}"></span>
-								</div>
-
-								<!-- Dirección -->
-								<div class="col">
-									<strong class="d-block">Dirección:</strong> <span
-										th:text="${DatosProductor.direccion}"></span>
-								</div>
-
-								<!-- Fecha de Registro -->
-								<div class="col">
-									<strong class="d-block">Fecha de Registro:</strong> <span
-										th:text="${DatosProductor.fecha_registro}"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-
-
-				<div class="container-fluid d-flex flex-grow-1 mb-3">
-					<!-- Sección de datos del cliente -->
-					<div class="shadow bg-white rounded-3 flex-grow-1">
-					
-					
-						<div class = "rounded-top px-4 py-3 bg-dark ">
-							<h5
-							class="text-white text-left fw-bold">
-							Lista compras</h5>
-							<div class = "d-flex justify-content-end gap-2">
-							
-								<button class = "btn btn-primary fs-12">
-								2025
-								</button>
-								<button class = "btn btn-primary fs-12">
-								2024
-								</button>
-								<button class = "btn btn-primary fs-12">
-								2023
-								</button>
-							
-							</div>
-						</div>
-						
-
-						<table class="table table-primary">
-							<thead>
-								<tr>
-									<th>N°</th>
-									<th>Fecha</th>
-									<th>Total Importe</th>
-									<th>Acciones</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								<!-- Iteración sobre la lista de productos para mostrar sus datos -->
-								<tr th:each="compra, iterStat : ${ListaCompras}">
-									<td th:text="${iterStat.index + 1}">1</td>
-									<td th:text="${compra.fecha_compra}"></td>
-									<td th:text="${compra.total}"></td>
-									<td>
-									<div class="d-flex gap-2 h-auto">
-										<a class="btn-icon icon-view" th:href="@{/Dashboard/Productor/VerDatosProductor/{id}(id=${compra.id})}"></a>
-									</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-
-
-
-
-					</div>
-				</div>
-
-				<div
-					class="container-fluis d-flex justify-content-end gap-3 mt-4 shadow bg-white rounded-3 p-3 mt-auto">
-					<a class="btn btn-outline-secondary py-2 px-4 rounded-pill"
-						type="button" th:href="@{/Dashboard/Productor/ListaProductor}">Volver</a>
-					<a type="button"
-						class="btn btn-primary rounded-pill px-4 py-2"
-						th:href="@{/Compras/RealizarCompra(ClienteSeleccionado=${DatosProductor.id} + '-' + ${DatosProductor.nombre} + ' ' + ${DatosProductor.apellido})}">
-						Realizar Compra </a>
-				</div>
-
-
-
-
+        <div th:insert="Components/Menu :: Menu-Sidebar" id="Menu-container" class="Menu-container"></div>
+         <div th:insert="Components/Menu :: Menu-Header" class="Header-container"></div>
+        <div class="Main-container">
+		
+		<div class="bg-primary text-white rounded-top pt-3 pb-2 px-3">
+				<h5 class="fs-16">Datos del Productor</h5>
 			</div>
+
+			<div class="container-fluid shadow bg-white rounded-3 py-2 mb-3">
+
+
+				<!-- Contenedor principal con cinco columnas responsivas -->
+				<div class="container-fluid fs-14">
+
+					<div
+						class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
+
+						<!-- Campo DNI -->
+						<div class="col">
+							<strong class="d-block">DNI:</strong> <span
+								th:text="${DatosProductor.dni}"></span>
+						</div>
+
+						<!-- Nombres -->
+						<div class="col">
+							<strong class="d-block">Nombres:</strong> <span
+								th:text="${DatosProductor.nombre}"></span>
+						</div>
+
+						<!-- Apellidos -->
+						<div class="col">
+							<strong class="d-block">Apellidos:</strong> <span
+								th:text="${DatosProductor.apellido}"></span>
+						</div>
+
+						<!-- Correo -->
+						<div class="col">
+							<strong class="d-block">Correo:</strong> <span
+								th:text="${DatosProductor.correo}"></span>
+						</div>
+
+						<!-- Teléfono -->
+						<div class="col">
+							<strong class="d-block">Teléfono:</strong> <span
+								th:text="${DatosProductor.telefono}"></span>
+						</div>
+
+						<!-- ID Departamento -->
+						<div class="col">
+							<strong class="d-block">ID Departamento:</strong> <span
+								th:text="${DatosProductor.id_departamento}"></span>
+						</div>
+
+						<!-- ID Provincia -->
+						<div class="col">
+							<strong class="d-block">ID Provincia:</strong> <span
+								th:text="${DatosProductor.id_provincia}"></span>
+						</div>
+
+						<!-- ID Distrito -->
+						<div class="col">
+							<strong class="d-block">ID Distrito:</strong> <span
+								th:text="${DatosProductor.id_distrito}"></span>
+						</div>
+
+						<!-- Dirección -->
+						<div class="col">
+							<strong class="d-block">Dirección:</strong> <span
+								th:text="${DatosProductor.direccion}"></span>
+						</div>
+
+						<!-- Fecha de Registro -->
+						<div class="col">
+							<strong class="d-block">Fecha de Registro:</strong> <span
+								th:text="${DatosProductor.fecha_registro}"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+	
+			<div class = "container-fluid shadow mb-3 bg-light rounded-3 py-2">
+			  <div>
+			  		<button class = "btn btn-primary rounded-pill px-3">2025</button>
+			  </div>
+		
+			</div>
+
+			<!-- Tabla de productores -->
+			<table class="Table-custom shadow">
+				<thead>
+							<tr>
+								<th>N°</th>
+								<th>Fecha</th>
+								<th>Total Importe</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+			</table>
+
+			<!-- Contenedor de la tabla con scroll -->
+			<div class="overflow-y-auto mb-3 rounded-3">
+				<table class="Table-custom">
+					<tbody>
+							<!-- Iteración sobre la lista de compras -->
+							<tr th:each="compra, iterStat : ${ListaCompras}">
+								<td th:text="${iterStat.index + 1}">1</td>
+								<td th:text="${compra.fecha_compra}"></td>
+								<td th:text="${compra.total}"></td>
+								<td>
+									<div class="d-flex gap-2 h-auto">
+										<a class="btn-icon icon-view"
+											th:href="@{/Dashboard/Productor/VerDatosProductor/{id}(id=${compra.id})}"></a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+				</table>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+			<div
+				class="container-fluid d-flex justify-content-end gap-3 mt-4 shadow bg-white rounded-3 p-3 mt-auto">
+				<a class="btn btn-outline-secondary py-2 px-4 rounded-pill"
+					th:href="@{/Dashboard/Productor/ListaProductor}">Volver</a> <a
+					class="btn btn-primary rounded-pill px-4 py-2"
+					th:href="@{/Dashboard/Compra/RegistrarCompra(ProductorSeleccionado=${DatosProductor.id} + ' | ' + ${DatosProductor.nombre})}">Realizar
+					Compra</a>
+			</div>
+		
+		
+		
+		
+		
 		</div>
 	</div>
-	
+
+	<!-- Script de inicialización -->
 	<script>
 		setActiveByIndex(0);
 	</script>
-	
+
 </body>
 </html>

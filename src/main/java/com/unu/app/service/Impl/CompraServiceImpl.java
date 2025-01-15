@@ -16,10 +16,9 @@ public class CompraServiceImpl implements CompraService {
 	@Autowired
 	@Qualifier("compraRepository")
 	private CompraRepository compraRepository;
-	
 
 	@Override
-	public List<Compra> ListaCompras() {
+	public List<Compra> getListaCompras() {
 		return compraRepository.findAll();
 	}
 
@@ -38,7 +37,7 @@ public class CompraServiceImpl implements CompraService {
 	@Override
 	public Compra ObtenerCompra(int id) {
 		return compraRepository.findById(id)
-	            .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + id));
+				.orElseThrow(() -> new IllegalArgumentException("Compra no encontrado con ID: " + id));
 	}
 
 	@Override
@@ -48,15 +47,18 @@ public class CompraServiceImpl implements CompraService {
 
 	@Override
 	public int getLastId() {
-		return compraRepository.ObtenerUltimoId();
+		return compraRepository.obtenerSiguienteId();
 	}
 
 	@Override
-	public List<Compra> getListaCompraByIdCliente(Productor cliente) {
-		return compraRepository.getListaCompraByIdCliente(cliente);
+	public List<Compra> getListaCompraByIdProductor(Productor cliente) {
+		return compraRepository.getListaCompraByIdProductor(cliente);
 	}
 
-	
-	
-	
+	@Override
+	public boolean isExistCompra(int id) {
+		return compraRepository.existsById(id);
+		
+	}
+
 }

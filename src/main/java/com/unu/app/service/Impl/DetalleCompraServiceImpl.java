@@ -65,6 +65,17 @@ public class DetalleCompraServiceImpl implements DetalleCompraService {
 		return ImporteTotal;
 	}
 
+	@Override
+	public Double obtenerTotalPorCompra(int idCompra) {
+		
+		return detalleCompraRepository.obtenerTotalPorCompra(idCompra);
+	}
+
+	@Override
+	public List<DetalleCompra> ListaDetalleByIdCompra(Long compra) {
+		return detalleCompraRepository.ListaDetalleByIdCompra(compra);
+	}
+
 	
 	
 }

@@ -14,9 +14,11 @@ import com.unu.app.entity.Compra;
 @Repository("compraRepository")
 public interface CompraRepository extends JpaRepository<Compra, Serializable> {
 	
-	@Query(value = "SELECT LAST_INSERT_ID()", nativeQuery = true)
-    public int ObtenerUltimoId();
 	
-	@Query("SELECT c FROM Compra c WHERE c.id_cliente = :idCliente")
-    List<Compra> getListaCompraByIdCliente(@Param("idCliente") Productor cliente);
+	
+	@Query(value = "SELECT MAX(id) FROM compras", nativeQuery = true)
+    public int obtenerSiguienteId();
+	
+	@Query("SELECT c FROM Compra c WHERE c.id_productor = :idProductor")
+    List<Compra> getListaCompraByIdProductor(@Param("idProductor") Productor productor);
 }

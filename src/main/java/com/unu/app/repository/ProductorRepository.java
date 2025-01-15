@@ -36,6 +36,7 @@ public interface ProductorRepository extends JpaRepository<Productor, Serializab
 	        + "(p.correo LIKE CONCAT(:busqueda, '%')) OR " + "(p.telefono LIKE CONCAT(:busqueda, '%'))")
 	public Page<Productor> buscarByAll(Pageable pageable,  @Param("busqueda") String busqueda);
 
+	
 	@Query("SELECT new Productor(p.id,p.nombre,p.apellido) FROM Productor p ")
 	public List<Productor> getListClientesNameAndId();
 

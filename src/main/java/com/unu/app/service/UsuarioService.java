@@ -1,11 +1,16 @@
 package com.unu.app.service;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.unu.app.entity.Productor;
 import com.unu.app.entity.Usuario;
 import com.unu.app.repository.UsuarioRepository;
 
@@ -37,6 +42,22 @@ public class UsuarioService implements UserDetailsService {
 	
 	public Usuario getUserByUsername(String username) {
 		return usuarioDetailsRepository.findByUsername(username);
+	}
+	
+	public Usuario getUserById(int id) {
+		return usuarioDetailsRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + id));
+	}
+	
+	public void EliminarUsuario(int id) {
+		if (usuarioDetailsRepository.existsById(id)) {
+			usuarioDetailsRepository.deleteById(id);
+		}
+	}
+	
+	public Page<Usuario> ListarUauario(Pageable pageable) {
+		Page<Usuario> listaClientes = usuarioDetailsRepository.findAll(PageRequest.of(pageable.getPageNumber(),20));
+		return listaClientes;
 	}
 	
 	

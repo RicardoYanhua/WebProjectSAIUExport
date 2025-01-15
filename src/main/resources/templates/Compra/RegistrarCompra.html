@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+<meta charset="UTF-8" pageEncoding="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registrar compra</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+
+
+<link href="/Styles/ComponentesStyle.css" rel="stylesheet">
+<link href="/Styles/MenuStyle.css" rel="stylesheet">
+
+<link href="/Styles/TableStyle.css" rel="stylesheet">
+<script src="/Scripts/MenuScript.js"></script>
+<script src="/Scripts/ModalAndToastScript.js"></script>
+<script src="/Scripts/ComponentesScript.js"></script>
+<script src="/Scripts/ValidarFormulario.js"></script>
+
+
+</head>
+
+<body>
+	<div class="Container">
+		<div th:unless="${isActivedCompra}"
+			th:insert="Components/Menu :: Menu-Sidebar" id="Menu-container"
+			class="Menu-container"></div>
+		<div th:unless="${isActivedCompra}"
+			th:insert="Components/Menu :: Menu-Header" class="Header-container"></div>
+		<div class="Main-container">
+
+
+			<div class="container w-50 ">
+
+				<form method="post"
+					th:action="@{/Dashboard/Compra/InsertarDetalleCompra}"
+					onsubmit="return ValidarFormularioDetalle()">
+					<input type="hidden" th:value="${CodigoCompra}" name="CodigoCompra">
+
+					<div class="mb-3 shadow rounded-3 bg-white">
+						<div class="bg-warning text-white rounded-top pt-3 pb-2 px-3">
+							<strong class="fs-16 text-dark">Productor</strong>
+						</div>
+
+
+						<div class="container  py-3">
+							<div class="dropdown">
+								<div class="Container-Input">
+									<img src="/SVG/icon-cliente.svg" alt="Search Icon"> <input
+										id="InputProductor" type="hidden" class="is-selected"
+										name="isSelected" value="False"> <input
+										id="InputTextProductor" class="search-input fw-bold" type="search"
+										th:value="${ProductorSeleccionado}"
+										name="ProductorSeleccionado"
+										placeholder="Escribe para seleccionar un productor..."
+										autocomplete="off" oninput="filterOptions(this)">
+
+									<button type="button" class="btn ClearButton clear-button"
+										onclick="clearInput(this)" style="display: none"
+										aria-label="Clear input">
+										<img alt="Clear Icon" src="/SVG/icon-clear-text.svg"
+											width="20" height="20">
+									</button>
+								</div>
+
+								<ul class="dropdown-menu w-100 overflow-y-auto"
+									style="max-height: 200px;">
+									<li class="dropdown-item text-muted no-results d-none">No
+										se encontraron registros</li>
+									<li th:each="productor : ${ListaProductor}"><span
+										class="dropdown-item"
+										th:text="${productor.id} + ' | ' + ${productor.nombre}"
+										onclick="selectItem(this)"></span></li>
+								</ul>
+							</div>
+						</div>
+
+
+					</div>
+
+					<div class="mb-3 shadow rounded-3 bg-white">
+						<div class="bg-warning text-white rounded-top pt-3 pb-2 px-3">
+							<strong class="fs-16 text-dark">Agregar Semilla</strong>
+						</div>
+
+
+						<div class="d-flex py-3 pe-3">
+
+							<div class="container">
+								<div class="dropdown">
+									<div class="Container-Input">
+										<img src="/SVG/icon-cliente.svg" alt="Search Icon"> <input
+											id="InputSemilla" type="hidden" class="is-selected"
+											name="isSelected" value="False"> <input
+											class="search-input fw-bold" type="search"
+											th:value="${SemillaSeleccionado}" name="SemillaSeleccionado"
+											placeholder="Selecccione una semilla" autocomplete="off"
+											oninput="filterOptions(this)">
+
+										<button type="button" class="btn ClearButton clear-button"
+											onclick="clearInput(this)" style="display: none"
+											aria-label="Clear input">
+											<img alt="Clear Icon" src="/SVG/icon-clear-text.svg"
+												width="20" height="20">
+										</button>
+									</div>
+
+									<ul class="dropdown-menu w-100 overflow-y-auto"
+										style="max-height: 200px;">
+										<li class="dropdown-item text-muted no-results d-none">No
+											se encontraron registros</li>
+										<li th:each="semilla : ${ListaSemilla}"><span
+											class="dropdown-item"
+											th:text="${semilla.id} + ' | ' + ${semilla.nombre}"
+											onclick="selectItem(this)"></span></li>
+									</ul>
+								</div>
+
+							</div>
+
+							<div>
+								<!-- Campo de usuario -->
+								<div>
+
+									<div class="d-flex gap-3">
+										<div class="Container-Input">
+											<img src="/SVG/icon-default.svg"> <input
+												class="FormatoDouble fw-bold" id="InputCantidad" type="search"
+												placeholder="0" name = "Cantidad" th:value="${Cantidad}">
+
+										</div>
+										<button type="submit"
+											class="btn btn-primary rounded-3 px-3 fs-12">Insertar</button>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+				</form>
+
+
+				<table class="Table-custom shadow">
+					<thead>
+						<tr>
+							<th>N°</th>
+							<th>Semilla</th>
+							<th>Precio</th>
+							<th>Cantidad</th>
+							<th>Importe</th>
+							<th></th>
+						</tr>
+					</thead>
+				</table>
+
+				<!-- Contenedor de la tabla con scroll -->
+				<div class="overflow-y-auto mb-3 rounded-3">
+					<table class="Table-custom ">
+						<tbody>
+							<tr th:each="detalleCompra, iterStat : ${ListaDetalleCompra}">
+								<td th:text="${iterStat.index + 1}" data-label="Item Numero"></td>
+								<td th:text="${detalleCompra.id_semilla.nombre}"
+									data-label="Nombre semilla"></td>
+								<td th:text="${detalleCompra.id_semilla.precio}"
+									data-label="Precio semilla"></td>
+								<td th:text="${detalleCompra.cantidad}" data-label="Cantidad"></td>
+
+								<td th:text="${detalleCompra.subtotal}" data-label="Sub total"></td>
+								<td>
+
+									<form
+										th:action="@{/Dashboard/Compra/EliminarDetalleCompra/{id}(id=${detalleCompra.id})}"
+										method="post">
+										<input type="hidden" th:value="${ProductorSeleccionado}"
+											name="ProductorSeleccionado"> <input type="hidden"
+											th:value="${CodigoCompra}" name="CodigoCompra">
+										<button class="btn-icon icon-delete" type="submit"></button>
+
+									</form>
+
+
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+
+			</div>
+
+			<div
+				class="d-flex flex-column align-items-center container-fluid bg-white shadow rounded-3 py-3 mt-auto w-50 gap-3 ">
+				<div
+					class="d-flex justify-content-end align-items-center gap-3 mt-auto">
+					<span class="fw-bold fs-14">Importe total:</span> 
+					<span
+						class="fw-bold text-white fs-14 bg-primary rounded-3 px-3 py-1" th:text="${ImporteTotal}">$0.00</span>
+				</div>
+
+
+				<div class="d-flex justify-content-center gap-3">
+
+
+					<form th:action="@{/Dashboard/Compra/EliminarCompra}" method="post">
+						<input type="hidden" th:value="${CodigoCompra}"
+							name="CodigoCompra">
+						<button
+							class="btn btn-secondary py-2 px-4 rounded-pill fw-bold"
+							type="submit">Cancelar</button>
+
+					</form>
+
+					<form th:href="@{/Dashboard/Compra/ListaCompra}" method="get">
+
+						<button type="submit" id="activateButton"
+							class="btn btn-primary rounded-pill px-4" disabled>Guardar
+							Compra</button>
+					</form>
+
+
+				</div>
+
+
+			</div>
+
+
+
+
+
+		</div>
+
+	</div>
+
+
+	<div th:insert="Components/ModalAndToast :: Toast-MessageDanger"></div>
+	<script>
+		setActiveByIndex(2);
+	</script>
+
+</body>
+
+</html>
+

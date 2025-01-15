@@ -10,21 +10,30 @@
 	--MenuBorderContainer: 8px;
 }
 
-.Container {
-	display: flex; height : 100vh;
-	padding: 15px 15px;
-	background-color: rgb(240, 245, 255);
-	border-radius: 8px;
-	transition: all 0.3s ease;
-	gap: 15px;
+body{
+	background-color: rgb(60,60,60);
+	padding: 3px 3px;
 	height: 100vh;
+}
+
+.Container {	
+	display: flex; height : 100vh;
+	padding: 10px 10px;
+	background-color: rgb(240,250,255);
+	
+	border-radius: 12px;
+	height:100%;
+	transition: all 0.3s ease;
+	gap: 15px;	
+	
 }
 
 .Menu-container {
 	border-radius: var(--MenuBorderContainer);
 	background-color: var(--MenuBackgroundColor);
 	padding: var(--MenuPadding);
-	width: 220px;
+	border:1px solid rgb(220,220,220);
+	width: 230px;
 	position: relative;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -33,24 +42,10 @@
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+
+	
 }
 
-.Header-container {
-	border-radius: 8px;
-	position: sticky;	
-    top: 0;
-    z-index: 1051;
-	display: flex;
-	flex-direction: column;
-}
-
-.Body-container {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	padding: 0px 10px;
-	height: 100%;
-}
 
 .navbar {
 	height: 60px;
@@ -160,17 +155,23 @@
 	#ButtonHeader {
 		display: block;
 	}
+	
+	#NavBarHeader{
+		z-index: 1051;
+	}
+	
 	.Container{
 	display: flex;
 	height: auto;
 	min-height: 100vh;
 	}
+	
+	.Main-container{
+		margin-top: 70px;
+	}
+	
 	.Menu-container {
 		display: none;
 	}
-	.Body-container {
-		display: flex;
-		flex-direction: column;
-		height: auto;
-	}
+	
 }

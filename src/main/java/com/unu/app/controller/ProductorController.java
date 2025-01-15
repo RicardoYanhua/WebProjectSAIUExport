@@ -24,12 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unu.app.controller.security.LoginStatusListener;
+import com.unu.app.controller.security.PermisosService;
 import com.unu.app.entity.Productor;
+import com.unu.app.entity.Usuario;
 import com.unu.app.entity.Ubicacion.Departamento;
 import com.unu.app.entity.Ubicacion.Distrito;
 import com.unu.app.entity.Ubicacion.GeoClientService;
 import com.unu.app.entity.Ubicacion.Provincia;
 import com.unu.app.service.SemillaService;
+import com.unu.app.service.UsuarioService;
 import com.unu.app.service.CompraService;
 import com.unu.app.service.ProductorService;
 
@@ -61,25 +64,6 @@ class Ubicacion {
 @RequestMapping("/Dashboard/Productor")
 public class ProductorController {
 
-	 @ModelAttribute
-		public void ConfigurarPermisos(Model model) {
-			model.addAttribute("isUserLogin", LoginStatusListener.isUserLogin);
-
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			if (auth != null && auth.isAuthenticated()) {
-				Object principal = auth.getPrincipal();
-				if (principal instanceof UserDetails) {
-					UserDetails userDetails = (UserDetails) principal;
-					String roles = userDetails.getAuthorities()
-							.stream()
-							.map(GrantedAuthority::getAuthority)
-							.collect(Collectors.joining(", "));
-					model.addAttribute("rol", roles.replace("ROLE_", "").toUpperCase());
-					model.addAttribute("username", userDetails.getUsername());
-				}
-			}
-		}
-	 
 	@Autowired
 	@Qualifier("productorService")
 	private ProductorService productorService;
@@ -87,6 +71,15 @@ public class ProductorController {
 	@Autowired
 	@Qualifier("compraService")
 	private CompraService compraService;
+	
+	@Autowired
+    private PermisosService permisosService;
+
+    @ModelAttribute
+    @Qualifier("configPermisos")
+    public void configurarPermisos(Model model) {
+        permisosService.configurarPermisos(model);
+    }
 	
 	@GetMapping("/NuevoProductor")
 	public ModelAndView NuevoProductor(){
@@ -112,9 +105,9 @@ public class ProductorController {
 	@GetMapping("/VerDatosProductor/{id}")
 	public ModelAndView VerDatosProductor(@PathVariable(name = "id") int id){
 		ModelAndView modelAndView = new ModelAndView("/Productor/VerDatosProductor");
-		Productor ObtenerCliente = productorService.ObtenerProductor(id);
-		modelAndView.addObject("DatosProductor", ObtenerCliente); 
-		modelAndView.addObject("ListaCompras",compraService.getListaCompraByIdCliente(ObtenerCliente));
+		Productor ObtenerProductor = productorService.ObtenerProductor(id);
+		modelAndView.addObject("DatosProductor", ObtenerProductor); 
+		modelAndView.addObject("ListaCompras",compraService.getListaCompraByIdProductor(ObtenerProductor));
 		return modelAndView;
 	}
 	
